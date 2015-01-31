@@ -17,7 +17,6 @@ public class showerSaver extends Game {
 		loadManager.load("gamefont_0.png",Texture.class);
 		loadManager.load("gamefont_1.png",Texture.class);
 		loadManager.load("gamefont.fnt",BitmapFont.class);
-		if(loadManager.update())
-			this.setScreen(new splashScreen(this));
+		this.setScreen(new splashScreen(this));
 	}	
 }
