@@ -2,6 +2,7 @@ package com.saver.shower;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
+import com.saver.shower.splashScreen;
 
 public class showerSaver extends Game {
 	
@@ -12,6 +13,5 @@ public class showerSaver extends Game {
 	@Override
 	public void create() {
 		this.setScreen(new splashScreen(this));
-	}
-			
+	}	
 }
