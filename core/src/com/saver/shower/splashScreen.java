@@ -31,11 +31,9 @@ public class splashScreen implements Screen{
 	public splashScreen(showerSaver obj) {
 		this.loadManager = obj.loadManager;
 		this.object = obj;
-		white = loadManager.get("gamefont.fnt",BitmapFont.class);
 		camera = new OrthographicCamera();
 		img = new Texture("badlogic.jpg");
 		batch = new SpriteBatch();
-		
 	}
 
 	@Override
@@ -63,7 +61,8 @@ public class splashScreen implements Screen{
 	private void tweencompleted(){
 		//status = true;
 		Gdx.app.log(showerSaver.LOG, "Tween Complete");
-		object.setScreen(new mainMenu(this));
+		if(loadManager.update())
+			object.setScreen(new mainMenu(this));
 	}
 
 	@Override
