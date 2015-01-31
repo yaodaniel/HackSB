@@ -27,6 +27,7 @@ public class splashScreen implements Screen{
 	private Sprite splashSprite;
 	private Texture img, splashTexture;
 	private TweenManager manager;
+	private boolean tweenStatus = false;
 	
 	public splashScreen(showerSaver obj) {
 		this.loadManager = obj.loadManager;
@@ -59,10 +60,8 @@ public class splashScreen implements Screen{
 	}
 	
 	private void tweencompleted(){
-		//status = true;
+		tweenStatus = true;
 		Gdx.app.log(showerSaver.LOG, "Tween Complete");
-		//if(loadManager.update())
-			object.setScreen(new mainMenu(this));
 	}
 
 	@Override
@@ -76,7 +75,8 @@ public class splashScreen implements Screen{
 		//batch.draw(img,Gdx.graphics.getWidth()/2-img.getWidth()/2,Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		splashSprite.draw(batch);
 		batch.end();
-		
+		if(loadManager.update() && tweenStatus)
+			object.setScreen(new mainMenu(this));
 	}
 
 	@Override

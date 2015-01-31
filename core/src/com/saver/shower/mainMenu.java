@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -44,8 +43,7 @@ public class mainMenu implements Screen{
 		skin = new Skin(atlas);
 		stage = new Stage(new ScreenViewport());
 		Gdx.app.log(showerSaver.LOG, "After White Loaded! ");
-		//white = loadmanager.get("gamefont.fnt", BitmapFont.class);
-		white = new BitmapFont(Gdx.files.internal("gamefont.fnt"));
+		white = loadmanager.get("gamefont.fnt", BitmapFont.class);
 	}
 
 	@Override
