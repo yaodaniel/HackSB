@@ -1,0 +1,9 @@
+Username: Schylock
+
+Password: 1234567890
+
+Your API Key: MJMS5DTSLKQ0DAV34 
+
+Your Consumer Key: fa6a1166de782f54851f0022715d7342 
+
+Your Shared Secret: jaIo/Q0mSO+AVChJoEnqrQ
