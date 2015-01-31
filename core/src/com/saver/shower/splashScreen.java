@@ -71,6 +71,7 @@ public class splashScreen implements Screen{
 		//batch.draw(img,Gdx.graphics.getWidth()/2-img.getWidth()/2,Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		splashSprite.draw(batch);
 		batch.end();
+
 		if(showerSaver.loadManager.update() && tweenStatus)
 			appObject.setScreen(new mainMenu(appObject));
 	}
