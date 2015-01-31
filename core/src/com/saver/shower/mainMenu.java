@@ -2,6 +2,7 @@ package com.saver.shower;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 
 public class mainMenu implements Screen{
+	public AssetManager loadmanager;
 	public BitmapFont white;
 	private splashScreen object;
 	private OrthographicCamera camera;
@@ -32,6 +34,7 @@ public class mainMenu implements Screen{
 	
 	public mainMenu(splashScreen obj){
 		this.object = obj;
+		this.loadmanager = obj.loadManager;
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 800, 600);
 		img = new Texture("SS2.bmp");
@@ -40,7 +43,9 @@ public class mainMenu implements Screen{
 		atlas = new TextureAtlas(Gdx.files.internal("button.pack"));
 		skin = new Skin(atlas);
 		stage = new Stage(new ScreenViewport());
-		white = obj.white;
+		Gdx.app.log(showerSaver.LOG, "After White Loaded! ");
+		//white = loadmanager.get("gamefont.fnt", BitmapFont.class);
+		white = new BitmapFont(Gdx.files.internal("gamefont.fnt"));
 	}
 
 	@Override
@@ -57,8 +62,10 @@ public class mainMenu implements Screen{
 		
 		stage.act(delta);
 		batch.begin();
-		batch.draw(img,Gdx.graphics.getWidth()/2-img.getWidth()/2,Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		stage.draw();
+		batch.end();
+		batch.begin();
+		batch.draw(img,Gdx.graphics.getWidth()/2-img.getWidth()/2,Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		batch.end();
 		
 	}
@@ -80,7 +87,7 @@ public class mainMenu implements Screen{
 		style.up = skin.getDrawable("button.up");
 		style.down = skin.getDrawable("button.down");
 		style.over = skin.getDrawable("button.down");
-		//style.font = white;
+		style.font = white;
 		button_start = new TextButton("Start", style);
 		button_start.setWidth(Gdx.graphics.getWidth()/1.5f);
 		button_start.setHeight(Gdx.graphics.getHeight()/8);

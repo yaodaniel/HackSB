@@ -61,7 +61,7 @@ public class splashScreen implements Screen{
 	private void tweencompleted(){
 		//status = true;
 		Gdx.app.log(showerSaver.LOG, "Tween Complete");
-		if(loadManager.update())
+		//if(loadManager.update())
 			object.setScreen(new mainMenu(this));
 	}
 
