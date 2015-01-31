@@ -8,14 +8,19 @@ import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class splashScreen implements Screen{
+	public AssetManager loadManager;
+	public BitmapFont white;
+	
 	private showerSaver object;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
@@ -24,10 +29,13 @@ public class splashScreen implements Screen{
 	private TweenManager manager;
 	
 	public splashScreen(showerSaver obj) {
+		this.loadManager = obj.loadManager;
 		this.object = obj;
+		white = loadManager.get("gamefont.fnt",BitmapFont.class);
 		camera = new OrthographicCamera();
 		img = new Texture("badlogic.jpg");
 		batch = new SpriteBatch();
+		
 	}
 
 	@Override
