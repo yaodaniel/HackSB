@@ -71,9 +71,9 @@ public class splashScreen implements Screen{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		manager.update(delta);
 		camera.update();
-		//batch.setProjectionMatrix(camera.combined);
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(img,Gdx.graphics.getWidth()/2-img.getWidth()/2,Gdx.graphics.getHeight()/2-img.getHeight()/2);
+		//batch.draw(img,Gdx.graphics.getWidth()/2-img.getWidth()/2,Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		splashSprite.draw(batch);
 		batch.end();
 		
@@ -82,7 +82,6 @@ public class splashScreen implements Screen{
 	@Override
 	public void resize(int width, int height) {
 		camera.setToOrtho(false, 800, 600);
-		
 	}
 
 	@Override
@@ -99,13 +98,13 @@ public class splashScreen implements Screen{
 
 	@Override
 	public void hide() {
-		
+		dispose();
 		
 	}
 
 	@Override
 	public void dispose() {
-		
-		
+		splashTexture.dispose();
+		batch.dispose();
 	}
 }
