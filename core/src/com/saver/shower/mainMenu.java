@@ -42,7 +42,6 @@ public class mainMenu implements Screen{
 		atlas = new TextureAtlas(Gdx.files.internal("button.pack"));
 		skin = new Skin(atlas);
 		stage = new Stage(new ScreenViewport());
-		Gdx.app.log(showerSaver.LOG, "After White Loaded! ");
 		white = loadmanager.get("gamefont.fnt", BitmapFont.class);
 	}
 
@@ -87,10 +86,10 @@ public class mainMenu implements Screen{
 		style.over = skin.getDrawable("button.down");
 		style.font = white;
 		button_start = new TextButton("Start", style);
-		button_start.setWidth(Gdx.graphics.getWidth()/1.5f);
+		button_start.setWidth(Gdx.graphics.getWidth()/4.5f);
 		button_start.setHeight(Gdx.graphics.getHeight()/8);
-		button_start.setX(Gdx.graphics.getWidth()/2- button_start.getWidth()/2);
-		button_start.setY(Gdx.graphics.getHeight()/3- button_start.getHeight()/2);
+		button_start.setX(Gdx.graphics.getWidth()/2 + button_start.getWidth());
+		button_start.setY(Gdx.graphics.getHeight()/3 - 2*button_start.getHeight());
 		button_start.addListener(new InputListener() {
 			public boolean touchDown (InputEvent event, float x, float y,
 										int pointer, int button) {
@@ -114,7 +113,37 @@ public class mainMenu implements Screen{
 				}
 			}
 		});
+		//button_history
+		button_history = new TextButton("History", style);
+		button_history.setWidth(Gdx.graphics.getWidth()/4.5f);
+		button_history.setHeight(Gdx.graphics.getHeight()/8);
+		button_history.setX(Gdx.graphics.getWidth()/2 - 2*button_start.getWidth());
+		button_history.setY(Gdx.graphics.getHeight()/3 - 2*button_start.getHeight());
+		button_history.addListener(new InputListener() {
+			public boolean touchDown (InputEvent event, float x, float y,
+										int pointer, int button) {
+				checked = true;
+				Gdx.app.log(showerSaver.LOG, "Button Checked!");
+				return true;
+			}
+			public void touchUp(InputEvent event, float x, float y,
+									int pointer, int button) {
+				if(checked)
+				Gdx.app.log(showerSaver.LOG, "Button Not Checked!");
+				checked = false;
+			}
+			public void touchDragged(InputEvent event, float x, float y, int pointer)
+			{
+				if(!button_start.isPressed()){
+					checked = false;
+					Gdx.app.log(showerSaver.LOG, "Button [almost] Checked!");
+				}else{
+					checked = true;
+				}
+			}
+		});
 		stage.addActor(button_start);
+		stage.addActor(button_history);
 	}
 
 	@Override
