@@ -8,15 +8,18 @@ import com.saver.shower.splashScreen;
 
 public class showerSaver extends Game {
 	
+	public static float timer = 420f;
 	public static final String VERSION = "4.19";
 	public static final String LOG = "Hackathon_app";
-	public AssetManager loadManager = new AssetManager();
+	public static AssetManager loadManager = new AssetManager();
+	public static BitmapFont white;
+	//public static Skin buttonSkin;
 	
 	@Override
 	public void create() {
 		loadManager.load("gamefont_0.png",Texture.class);
 		loadManager.load("gamefont_1.png",Texture.class);
 		loadManager.load("gamefont.fnt",BitmapFont.class);
-		this.setScreen(new splashScreen(this));
+		setScreen(new splashScreen(this));
 	}	
 }

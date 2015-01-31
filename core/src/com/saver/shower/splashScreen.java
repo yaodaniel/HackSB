@@ -8,20 +8,17 @@ import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.saver.shower.mainMenu;;
 
 public class splashScreen implements Screen{
-	public AssetManager loadManager;
-	public BitmapFont white;
 	
-	private showerSaver object;
+	private showerSaver appObject;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Sprite splashSprite;
@@ -29,10 +26,9 @@ public class splashScreen implements Screen{
 	private TweenManager manager;
 	private boolean tweenStatus = false;
 	
-	public splashScreen(showerSaver obj) {
-		this.loadManager = obj.loadManager;
-		this.object = obj;
-		camera = new OrthographicCamera();
+	public splashScreen(showerSaver appObject) {
+		this.appObject = appObject;
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		img = new Texture("badlogic.jpg");
 		batch = new SpriteBatch();
 	}
@@ -75,13 +71,15 @@ public class splashScreen implements Screen{
 		//batch.draw(img,Gdx.graphics.getWidth()/2-img.getWidth()/2,Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		splashSprite.draw(batch);
 		batch.end();
-		if(loadManager.update() && tweenStatus)
-			object.setScreen(new mainMenu(this));
+		if(showerSaver.loadManager.update() && tweenStatus)
+			appObject.setScreen(new mainMenu(appObject));
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		camera.setToOrtho(false, 800, 600);
+		camera.setToOrtho(false, width/2, height/2);
+		//camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+        //camera.update();
 	}
 
 	@Override

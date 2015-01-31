@@ -2,7 +2,6 @@ package com.saver.shower;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,9 +18,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 
 public class mainMenu implements Screen{
-	public AssetManager loadmanager;
-	public BitmapFont white;
-	private splashScreen object;
+	private showerSaver appObject;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture img;
@@ -31,24 +28,24 @@ public class mainMenu implements Screen{
 	private Stage stage;
 	private boolean checked;
 	
-	public mainMenu(splashScreen obj){
-		this.object = obj;
-		this.loadmanager = obj.loadManager;
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 600);
+	public mainMenu(showerSaver appObject){
+		this.appObject = appObject;
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        /*camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+        camera.update();*/
+		//camera.setToOrtho(false, 800, 600);
 		img = new Texture("SS2.bmp");
 		batch = new SpriteBatch();
 		//Button Stuff
 		atlas = new TextureAtlas(Gdx.files.internal("button.pack"));
 		skin = new Skin(atlas);
 		stage = new Stage(new ScreenViewport());
-		white = loadmanager.get("gamefont.fnt", BitmapFont.class);
+		showerSaver.white = showerSaver.loadManager.get("gamefont.fnt", BitmapFont.class);
 	}
 
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -56,7 +53,7 @@ public class mainMenu implements Screen{
 		Gdx.gl.glClearColor(0,0,0,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		camera.update();
-		
+		batch.setProjectionMatrix(camera.combined);
 		stage.act(delta);
 		batch.begin();
 		stage.draw();
@@ -64,18 +61,18 @@ public class mainMenu implements Screen{
 		batch.begin();
 		batch.draw(img,Gdx.graphics.getWidth()/2-img.getWidth()/2,Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		batch.end();
-		
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		camera.setToOrtho(false, 800, 600);
-		
+		//camera.setToOrtho(false, width/2, height/2);
+		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+        camera.update();
 		if(stage == null){
 			stage.getViewport().update(width, height, true);
 		}
 		if(stage.getWidth()!=width || stage.getHeight()!= height){
-			stage.dispose();
+			//stage.dispose();
 			stage.getViewport().update(width, height, true);
 		}
 		stage.clear();
@@ -84,7 +81,7 @@ public class mainMenu implements Screen{
 		style.up = skin.getDrawable("button.up");
 		style.down = skin.getDrawable("button.down");
 		style.over = skin.getDrawable("button.down");
-		style.font = white;
+		style.font = showerSaver.white;
 		button_start = new TextButton("Start", style);
 		button_start.setWidth(Gdx.graphics.getWidth()/4.5f);
 		button_start.setHeight(Gdx.graphics.getHeight()/8);
@@ -101,7 +98,7 @@ public class mainMenu implements Screen{
 									int pointer, int button) {
 				if(checked){
 					Gdx.app.log(showerSaver.LOG, "Button Not Checked!");
-					object.setScreen(new timerSetup(object));
+					appObject.setScreen(new timerSetup(appObject));
 				}
 				checked = false;
 			}
@@ -176,5 +173,4 @@ public class mainMenu implements Screen{
 		stage.dispose();
 		button_start.remove();
 	}
-
 }
