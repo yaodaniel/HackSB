@@ -76,7 +76,8 @@ public class splashScreen implements Screen{
 		splashSprite.draw(batch);
 		batch.end();
 		if(loadManager.update() && tweenStatus)
-			object.setScreen(new mainMenu(this));
+			//object.setScreen(new mainMenu(this));
+			object.setScreen(new mainMenu(object));
 	}
 
 	@Override

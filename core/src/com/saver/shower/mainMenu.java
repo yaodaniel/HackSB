@@ -21,7 +21,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class mainMenu implements Screen{
 	public AssetManager loadmanager;
 	public BitmapFont white;
-	private splashScreen object;
+	private showerSaver object;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture img;
@@ -32,7 +32,7 @@ public class mainMenu implements Screen{
 	private boolean checked;
 	private int imageHeight;
 	
-	public mainMenu(splashScreen obj){
+	public mainMenu(showerSaver obj){
 		this.object = obj;
 		this.loadmanager = obj.loadManager;
 		camera = new OrthographicCamera();
@@ -100,6 +100,8 @@ public class mainMenu implements Screen{
 										int pointer, int button) {
 				checked = true;
 				Gdx.app.log(showerSaver.LOG, "Button Checked!");
+				//Call SongPage
+				object.setScreen(new songPage(object));				
 				return true;
 			}
 			public void touchUp(InputEvent event, float x, float y,
