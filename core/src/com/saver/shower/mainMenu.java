@@ -30,6 +30,7 @@ public class mainMenu implements Screen{
 	private Skin skin;
 	private Stage stage;
 	private boolean checked;
+	private int imageHeight;
 	
 	public mainMenu(splashScreen obj){
 		this.object = obj;
@@ -43,6 +44,7 @@ public class mainMenu implements Screen{
 		skin = new Skin(atlas);
 		stage = new Stage(new ScreenViewport());
 		white = loadmanager.get("gamefont.fnt", BitmapFont.class);
+		imageHeight = img.getHeight();
 	}
 
 	@Override
@@ -62,24 +64,27 @@ public class mainMenu implements Screen{
 		stage.draw();
 		batch.end();
 		batch.begin();
-		batch.draw(img,Gdx.graphics.getWidth()/2-img.getWidth()/2,Gdx.graphics.getHeight()/2-img.getHeight()/2);
+		batch.draw(img,0,Gdx.graphics.getHeight()-imageHeight);
 		batch.end();
 		
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		camera.setToOrtho(false, 800, 600);
-		
+		//camera.setToOrtho(false, 800, 600);
 		if(stage == null){
+			stage.getViewport().update(width, height, true);			
+		}
+		if(stage.getWidth()!=width|| stage.getHeight()!=height){
+			stage.clear();
 			stage.getViewport().update(width, height, true);
 		}
-		if(stage.getWidth()!=width || stage.getHeight()!= height){
-			stage.dispose();
-			stage.getViewport().update(width, height, true);
-		}
-		stage.clear();
+		camera.setToOrtho(false, width, height);
+		camera.update();
+		
 		Gdx.input.setInputProcessor(stage);
+				
+		//Buttons:
 		TextButtonStyle style = new TextButtonStyle();
 		style.up = skin.getDrawable("button.up");
 		style.down = skin.getDrawable("button.down");
