@@ -45,7 +45,7 @@ public class mainMenu implements Screen{
 		img = new Texture("SSbg.png");
 		batch = new SpriteBatch();
 		//Button Stuff
-		atlas = showerSaver.loadManager.get("button.pack");
+		atlas = showerSaver.loadManager.get("buttons.pack");
 		skin = new Skin(atlas);
 		stage = new Stage(new ScreenViewport());
 		showerSaver.white = showerSaver.loadManager.get("gamefont.fnt", BitmapFont.class);
@@ -99,9 +99,9 @@ public class mainMenu implements Screen{
 		stage.addActor(titleLabel);		
 		
 		TextButtonStyle style = new TextButtonStyle();
-		style.up = skin.getDrawable("button.up");
-		style.down = skin.getDrawable("button.down");
-		style.over = skin.getDrawable("button.down");
+		style.up = skin.getDrawable("SSbutt");
+		style.down = skin.getDrawable("SSbuttclick");
+		style.over = skin.getDrawable("SSbuttclick");
 		style.font = showerSaver.white;
 		button_start = new TextButton("Start", style);
 		button_start.setWidth(Gdx.graphics.getWidth()/4.5f);

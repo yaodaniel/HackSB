@@ -46,7 +46,7 @@ public class songPage extends history implements Screen{
 		img = new Texture("note.png");
         camera = new OrthographicCamera(600,795);
 		batch = new SpriteBatch();
-		atlas = new TextureAtlas(Gdx.files.internal("button.pack"));
+		atlas = new TextureAtlas(Gdx.files.internal("buttons.pack"));
 		skin = new Skin(atlas);
 		//white = new BitmapFont(Gdx.files.internal("gamefont.fnt"));
 		white = showerSaver.loadManager.get("gamefont.fnt", BitmapFont.class);
@@ -66,9 +66,9 @@ public class songPage extends history implements Screen{
         alerts = Gdx.audio.newMusic(Gdx.files.internal("data/alarm.mp3"));
         alerts.setLooping(true);
 		TextButtonStyle style = new TextButtonStyle();
-		style.up = skin.getDrawable("button.up");
-		style.down = skin.getDrawable("button.down");
-		style.over = skin.getDrawable("button.down");
+		style.up = skin.getDrawable("SSbuttw");
+		style.down = skin.getDrawable("SSbuttwclick");
+		style.over = skin.getDrawable("SSbuttwclick");
 		style.font = white;
         
         button_start = new TextButton("Done Early?", style);

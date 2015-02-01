@@ -40,7 +40,7 @@ public class playlistScreen implements Screen{
 		batch = new SpriteBatch();
 		
 		//Button Stuff
-		atlas = new TextureAtlas(Gdx.files.internal("button.pack"));
+		atlas = new TextureAtlas(Gdx.files.internal("buttons.pack"));
 		skin = new Skin(atlas);
 		stage = new Stage(new ScreenViewport());
 		showerSaver.white = showerSaver.loadManager.get("gamefont.fnt", BitmapFont.class);
@@ -90,9 +90,9 @@ public class playlistScreen implements Screen{
 		stage.addActor(displayPlaylist);
 		
 		TextButtonStyle style = new TextButtonStyle();
-		style.up = skin.getDrawable("button.up");
-		style.down = skin.getDrawable("button.down");
-		style.over = skin.getDrawable("button.down");
+		style.up = skin.getDrawable("SSbutt");
+		style.down = skin.getDrawable("SSbuttclick");
+		style.over = skin.getDrawable("SSbuttclick");
 		style.font = showerSaver.white;
 		
 		button_p1 = new TextButton("Swag Song List1", style);
