@@ -98,7 +98,7 @@ public class mainMenu implements Screen{
 									int pointer, int button) {
 				if(checked){
 					Gdx.app.log(showerSaver.LOG, "Button Not Checked!");
-					appObject.setScreen(new songPage(appObject));
+					appObject.setScreen(new timerSetup(appObject));
 				}
 				checked = false;
 			}

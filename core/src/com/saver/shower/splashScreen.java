@@ -78,7 +78,7 @@ public class splashScreen implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		camera.setToOrtho(false, width/2, height/2);
+		camera.setToOrtho(false, 800, 600);
 		//camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
         //camera.update();
 	}
