@@ -9,11 +9,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -46,32 +49,40 @@ public class StatsPage extends history implements Screen{
 		
 		//Get History and Calculations
 		String[] res = getHistory();
-		
 		resLength = res.length;
-		//Gdx.app.log(showerSaver.LOG, "resLength" + resLength);
-		for(int i=0; i< resLength; i++){
-			String[] timeShowered = res[i].split(" ",-1);
-			//Gdx.app.log(showerSaver.LOG, "timeShowered" + timeShowered[2]);
-			int t = Integer.parseInt(timeShowered[2]);//time in seconds
-			if(minVal > t){
-				//if t is minimum
-				minVal = t;
-			}
-			if(maxVal < t){
-				//if t is maximum
-				maxVal = t;
-			}
-			sum += t;	
-		}
-		avgVal = sum/resLength;
 		
+		if(resLength==0){
+			minVal = 0;
+			maxVal = 0;
+		}else{
+			minVal = Integer.parseInt(res[0].split(" ",-1)[2]);
+			maxVal = minVal;			
+		
+		
+			//Gdx.app.log(showerSaver.LOG, "resLength" + resLength);
+			for(int i=0; i< resLength; i++){
+				String[] timeShowered = res[i].split(" ",-1);
+				//Gdx.app.log(showerSaver.LOG, "timeShowered" + timeShowered[2]);
+				int t = Integer.parseInt(timeShowered[2]);//time in seconds
+				if(minVal > t){
+					//if t is minimum
+					minVal = t;
+				}
+				if(maxVal < t){
+					//if t is maximum
+					maxVal = t;
+				}
+				sum += t;	
+			}
+			avgVal = sum/resLength;
+		}
 		//Convert From Seconds into Min and Secs
 		avgMin = (int)(avgVal/60);
 		avgSec = (int)(avgVal%60);
 		longMin = (int)(maxVal/60);
 		longSec = (int)(maxVal%60);
-		shortMin = (int)(maxVal/60);
-		shortSec = (int)(maxVal%60);
+		shortMin = (int)(minVal/60);
+		shortSec = (int)(minVal%60);
 
 		//Create Label
 		displayStatsStyle = new LabelStyle(showerSaver.white,Color.WHITE);
@@ -115,6 +126,41 @@ public class StatsPage extends history implements Screen{
 		displayStats.setAlignment(Align.center);
 		displayStats.setFontScale(1.0f);
 		stage.addActor(displayStats);
+		
+		TextButtonStyle style = new TextButtonStyle();
+		style.up = skin.getDrawable("button.up");
+		style.down = skin.getDrawable("button.down");
+		style.over = skin.getDrawable("button.down");
+		style.font = showerSaver.white;
+		button_restart = new TextButton("-->", style);
+		button_restart.setWidth(Gdx.graphics.getWidth()/4.5f);
+		button_restart.setHeight(Gdx.graphics.getHeight()/8);
+		button_restart.setX(Gdx.graphics.getWidth()/2 + button_restart.getWidth());
+		button_restart.setY(Gdx.graphics.getHeight()/3 - 2*button_restart.getHeight());
+		button_restart.addListener(new InputListener() {
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				checked = true;
+				//Gdx.app.log(showerSaver.LOG, "Button Checked!");
+				return true;
+			}
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				if(checked){
+					//Gdx.app.log(showerSaver.LOG, "Button Not Checked!");
+					object.setScreen(new mainMenu(object));
+				}
+				checked = false;
+			}
+			public void touchDragged(InputEvent event, float x, float y, int pointer)
+			{
+				if(!button_restart.isPressed()){
+					checked = false;
+					//Gdx.app.log(showerSaver.LOG, "Button [almost] Checked!");
+				}else{
+					checked = true;
+				}
+			}
+		});
+		stage.addActor(button_restart);
 	}
 
 	@Override
