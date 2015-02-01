@@ -96,11 +96,11 @@ public class timerSetup implements Screen{
 		batch.end();
 		batch.begin();
 		if(showerSaver.timer < 480)
-			batch.draw(treeOne, Gdx.graphics.getWidth()/2 - treeOne.getWidth(),Gdx.graphics.getHeight()/8,2*treeOne.getWidth(),2*treeOne.getHeight());
+			batch.draw(treeOne, Gdx.graphics.getWidth()/2 - treeOne.getWidth(),Gdx.graphics.getHeight()/8,3.5f*treeOne.getWidth(),3.5f*treeOne.getHeight());
 		else if(showerSaver.timer >= 480 && showerSaver.timer < 900)
-			batch.draw(treeTwo,Gdx.graphics.getWidth()/2 - treeTwo.getWidth(),Gdx.graphics.getHeight()/8,2*treeTwo.getWidth(),2*treeTwo.getHeight());
+			batch.draw(treeTwo,Gdx.graphics.getWidth()/2 - treeTwo.getWidth(),Gdx.graphics.getHeight()/8,3.5f*treeTwo.getWidth(),3.5f*treeTwo.getHeight());
 		else if(showerSaver.timer >= 900)
-			batch.draw(treeThree,Gdx.graphics.getWidth()/2 - treeThree.getWidth(),Gdx.graphics.getHeight()/8,2*treeThree.getWidth(),2*treeThree.getHeight());
+			batch.draw(treeThree,Gdx.graphics.getWidth()/2 - treeThree.getWidth(),Gdx.graphics.getHeight()/8,3.5f*treeThree.getWidth(),3.5f*treeThree.getHeight());
 		batch.end();
 	}
 
