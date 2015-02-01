@@ -72,9 +72,9 @@ public class timerSetup implements Screen{
 		button_increaseTime = new TextButton("",timerStyleIncrease);
 		button_decreaseTime = new TextButton("",timerStyleDecrease);
 		
-		treeOne = showerSaver.loadManager.get("SS3.bmp");
-		treeTwo = showerSaver.loadManager.get("SS4.bmp");
-		treeThree = showerSaver.loadManager.get("SS5.bmp");
+		treeOne = showerSaver.loadManager.get("happyTree.png");
+		treeTwo = showerSaver.loadManager.get("sadTree.png");
+		treeThree = showerSaver.loadManager.get("verySadTree.png");
 		stage = new Stage(new ScreenViewport());
 	}
 	@Override
@@ -96,7 +96,7 @@ public class timerSetup implements Screen{
 		batch.end();
 		batch.begin();
 		if(showerSaver.timer < 480)
-			batch.draw(treeOne, Gdx.graphics.getWidth()/2 - treeOne.getWidth(),Gdx.graphics.getHeight()/8,3.5f*treeOne.getWidth(),3.5f*treeOne.getHeight());
+			batch.draw(treeOne, 0,0,3.5f*treeOne.getWidth(),3.5f*treeOne.getHeight());
 		else if(showerSaver.timer >= 480 && showerSaver.timer < 900)
 			batch.draw(treeTwo,Gdx.graphics.getWidth()/2 - treeTwo.getWidth(),Gdx.graphics.getHeight()/8,3.5f*treeTwo.getWidth(),3.5f*treeTwo.getHeight());
 		else if(showerSaver.timer >= 900)
@@ -106,7 +106,7 @@ public class timerSetup implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+		//camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
         camera.update();
 		if(stage == null){
 			stage = new Stage(new ScreenViewport());
