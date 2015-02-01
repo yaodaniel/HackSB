@@ -39,9 +39,11 @@ public class showerSaver extends Game {
 		setScreen(new splashScreen(this));
 	}	
 	
-	public static void updateTime(float seconds){
-		timer = seconds;
-		minute = (int)(seconds/60);
-		seconds = (int)(seconds%60);
+	public static void updateTime(float Seconds){
+		if(Seconds == -30)
+			return;
+		timer = Seconds;
+		minute = (int)(Seconds/60);
+		seconds = (int)(Seconds%60);			
 	}
 }
