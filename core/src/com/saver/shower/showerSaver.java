@@ -36,6 +36,9 @@ public class showerSaver extends Game {
 		loadManager.load("SS3.bmp", Texture.class);
 		loadManager.load("SS4.bmp", Texture.class);
 		loadManager.load("SS5.bmp", Texture.class);
+		loadManager.load("happyTree.png", Texture.class);
+		loadManager.load("sadTree.png", Texture.class);
+		loadManager.load("verySadTree.png", Texture.class);
 		setScreen(new splashScreen(this));
 	}	
 	
