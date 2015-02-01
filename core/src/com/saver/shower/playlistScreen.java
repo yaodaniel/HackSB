@@ -83,7 +83,7 @@ public class playlistScreen implements Screen{
 		Gdx.input.setInputProcessor(stage);
 		
 		displayPlaylist.setX(0);
-		displayPlaylist.setY(Gdx.graphics.getHeight()/6);
+		displayPlaylist.setY(Gdx.graphics.getHeight()- displayPlaylist.getHeight());
 		displayPlaylist.setWidth(width);
 		displayPlaylist.setAlignment(Align.center);
 		displayPlaylist.setFontScale(1.0f);
@@ -110,15 +110,15 @@ public class playlistScreen implements Screen{
 		button_p3.setHeight(Gdx.graphics.getHeight()/10);
 		button_p4.setHeight(Gdx.graphics.getHeight()/10);
 		
-		button_p1.setX(Gdx.graphics.getWidth()/2);
-		button_p2.setX(Gdx.graphics.getWidth()/2 );
-		button_p3.setX(Gdx.graphics.getWidth()/2 );
-		button_p4.setX(Gdx.graphics.getWidth()/2 );
+		button_p1.setX(Gdx.graphics.getWidth()/2 - button_p1.getWidth()/2);
+		button_p2.setX(Gdx.graphics.getWidth()/2 - button_p2.getWidth()/2);
+		button_p3.setX(Gdx.graphics.getWidth()/2 - button_p3.getWidth()/2);
+		button_p4.setX(Gdx.graphics.getWidth()/2 - button_p4.getWidth()/2);
 		
-		button_p1.setY(Gdx.graphics.getHeight()/3 - 2*button_p1.getHeight());
-		button_p2.setY(Gdx.graphics.getHeight()/3 - 3*button_p2.getHeight());
-		button_p3.setY(Gdx.graphics.getHeight()/3 - 4*button_p3.getHeight());
-		button_p4.setY(Gdx.graphics.getHeight()/3 - 1*button_p4.getHeight());
+		button_p1.setY(Gdx.graphics.getHeight() - 3*button_p1.getHeight());
+		button_p2.setY(Gdx.graphics.getHeight() - 4*button_p2.getHeight());
+		button_p3.setY(Gdx.graphics.getHeight() - 5*button_p3.getHeight());
+		button_p4.setY(Gdx.graphics.getHeight() - 6*button_p4.getHeight());
 		
 		button_p1.addListener(new InputListener() {
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {checked = true;return true;}
