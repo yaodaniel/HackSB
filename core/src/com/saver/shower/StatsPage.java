@@ -28,7 +28,7 @@ public class StatsPage extends history implements Screen{
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture img, treeOne, treeTwo, treeThree;
-	private TextButton button_restart, button_clearHist;
+	private TextButton button_restart, button_clearHist, button_facts;
 	private TextureAtlas atlas;
 	private Skin skin;
 	private Stage stage;
@@ -161,6 +161,33 @@ public class StatsPage extends history implements Screen{
 		style.font = showerSaver.white;
 		style.font.setScale(1.0f);
 		
+		button_facts = new TextButton("Facts", style);
+		button_facts.setWidth(Gdx.graphics.getWidth()/2.5f);
+		button_facts.setHeight(Gdx.graphics.getHeight()/10);
+		button_facts.setX(Gdx.graphics.getWidth()/2 - 1.1f*button_facts.getWidth());
+		button_facts.setY(Gdx.graphics.getHeight()/2 + 3*(button_facts.getHeight()+10));
+		button_facts.addListener(new InputListener() {
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				checked = true;
+				return true;
+			}
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				if(checked){
+					object.setScreen(new factsPage(object));
+				}
+				checked = false;
+			}
+			public void touchDragged(InputEvent event, float x, float y, int pointer)
+			{
+				if(!button_clearHist.isPressed()){
+					checked = false;
+				}else{
+					checked = true;
+				}
+			}
+		});
+
+		
 		button_clearHist = new TextButton("Clear History", style);
 		button_clearHist.setWidth(Gdx.graphics.getWidth()/2.5f);
 		button_clearHist.setHeight(Gdx.graphics.getHeight()/10);
@@ -218,6 +245,7 @@ public class StatsPage extends history implements Screen{
 		});
 		stage.addActor(button_restart);
 		stage.addActor(button_clearHist);
+		stage.addActor(button_facts);
 	}
 
 	@Override
