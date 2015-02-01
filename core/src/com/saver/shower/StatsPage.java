@@ -24,6 +24,7 @@ public class StatsPage extends history implements Screen{
 	private showerSaver object;
 	private LabelStyle displayStatsStyle;
 	private Label displayStats;
+	private Label displayTardy;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture img, treeOne, treeTwo, treeThree;
@@ -33,7 +34,7 @@ public class StatsPage extends history implements Screen{
 	private Stage stage;
 	private boolean checked;
 	private int avgMin, avgSec, longMin, longSec, shortMin, shortSec;
-	private int resLength, minVal, maxVal, sum, avgVal;
+	private int resLength, minVal, maxVal, sum, avgVal, overtimeVal;
 
 	
 	public StatsPage(showerSaver obj){
@@ -64,6 +65,7 @@ public class StatsPage extends history implements Screen{
 				String[] timeShowered = res[i].split(" ",-1);
 				//Gdx.app.log(showerSaver.LOG, "timeShowered" + timeShowered[2]);
 				int t = Integer.parseInt(timeShowered[2]);//time in seconds
+				int u = Integer.parseInt(timeShowered[1]);
 				if(minVal > t){
 					//if t is minimum
 					minVal = t;
@@ -72,6 +74,8 @@ public class StatsPage extends history implements Screen{
 					//if t is maximum
 					maxVal = t;
 				}
+				if (i==(resLength-1) && t - u > 0)
+					overtimeVal += (t - u);
 				sum += t;	
 			}
 			avgVal = sum/resLength;
@@ -83,14 +87,19 @@ public class StatsPage extends history implements Screen{
 		longSec = (int)(maxVal%60);
 		shortMin = (int)(minVal/60);
 		shortSec = (int)(minVal%60);
-
-		//Create Label
-		displayStatsStyle = new LabelStyle(showerSaver.white,Color.BLACK);
-		displayStats = new Label(String.format("Average Shower Time: %d min %d sec\n Longest Shower: %d min %d sec\n Shortest Shower: %d min %d sec\n", avgMin, avgSec, longMin, longSec, shortMin, shortSec), displayStatsStyle);
 		
-		treeOne = showerSaver.loadManager.get("SS3.bmp");
-		treeTwo = showerSaver.loadManager.get("SS4.bmp");
-		treeThree = showerSaver.loadManager.get("SS5.bmp");
+		if(overtimeVal == 0){
+			//On Time
+			displayStatsStyle = new LabelStyle(showerSaver.white,Color.BLACK);
+			displayStats = new Label(String.format("Average Shower Time: %d min %d sec\n Longest Shower: %d min %d sec\n Shortest Shower: %d min %d sec\n", avgMin, avgSec, longMin, longSec, shortMin, shortSec), displayStatsStyle);
+		}else{
+			displayStatsStyle = new LabelStyle(showerSaver.white,Color.RED);
+			displayStats = new Label(String.format("Your tardy time\n for this time is %d min %d sec...\nAverage Shower Time: %d min %d sec\n Longest Shower: %d min %d sec\n Shortest Shower: %d min %d sec\n", (int)overtimeVal/60,(int)overtimeVal%60, avgMin, avgSec, longMin, longSec, shortMin, shortSec), displayStatsStyle);			
+		}
+		
+		treeOne = showerSaver.loadManager.get("happyTree.png");
+		treeTwo = showerSaver.loadManager.get("sadTree.png");
+		treeThree = showerSaver.loadManager.get("verySadTree.png");
 	}
 	
 	@Override
@@ -106,7 +115,7 @@ public class StatsPage extends history implements Screen{
 		stage.act(delta);
 		batch.begin();
 		if(avgVal < 480)
-			batch.draw(treeOne, Gdx.graphics.getWidth()/2 - treeOne.getWidth(),Gdx.graphics.getHeight()/8,2*treeOne.getWidth(),2*treeOne.getHeight());
+		batch.draw(treeOne, Gdx.graphics.getWidth()/2 - treeOne.getWidth(),Gdx.graphics.getHeight()/8,2*treeOne.getWidth(),2*treeOne.getHeight());
 		else if(avgVal >= 480 && avgVal < 900)
 			batch.draw(treeTwo,Gdx.graphics.getWidth()/2 - treeTwo.getWidth(),Gdx.graphics.getHeight()/8,2*treeTwo.getWidth(),2*treeTwo.getHeight());
 		else if(avgVal >= 900)
@@ -139,6 +148,7 @@ public class StatsPage extends history implements Screen{
 		displayStats.setWidth(width);
 		displayStats.setAlignment(Align.center);
 		displayStats.setFontScale(1.0f);
+		
 		stage.addActor(displayStats);
 		
 		TextButtonStyle style = new TextButtonStyle();
@@ -146,7 +156,7 @@ public class StatsPage extends history implements Screen{
 		style.down = skin.getDrawable("SSbuttclick");
 		style.over = skin.getDrawable("SSbuttclick");
 		style.font = showerSaver.white;
-		button_restart = new TextButton("-->", style);
+		button_restart = new TextButton(">", style);
 		button_restart.setWidth(Gdx.graphics.getWidth()/4.5f);
 		button_restart.setHeight(Gdx.graphics.getHeight()/8);
 		button_restart.setX(Gdx.graphics.getWidth()/2 + button_restart.getWidth());

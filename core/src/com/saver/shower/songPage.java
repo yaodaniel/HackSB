@@ -43,14 +43,14 @@ public class songPage extends history implements Screen{
 	float totalTime, timer;
 	public songPage(showerSaver obj){
 		this.obj = obj;
-		img = new Texture("note.png");
+		img = new Texture("image3004.png");
         camera = new OrthographicCamera(600,795);
 		batch = new SpriteBatch();
 		atlas = new TextureAtlas(Gdx.files.internal("buttons.pack"));
 		skin = new Skin(atlas);
 		//white = new BitmapFont(Gdx.files.internal("gamefont.fnt"));
 		white = showerSaver.loadManager.get("gamefont.fnt", BitmapFont.class);
-		displayTimeStyle = new LabelStyle(white,Color.WHITE);
+		displayTimeStyle = new LabelStyle(white,Color.BLACK);
 		stage = new Stage(new ScreenViewport());
 		batch = new SpriteBatch();
 		displayTime = new Label("l", displayTimeStyle);
@@ -66,9 +66,9 @@ public class songPage extends history implements Screen{
         alerts = Gdx.audio.newMusic(Gdx.files.internal("data/alarm.mp3"));
         alerts.setLooping(true);
 		TextButtonStyle style = new TextButtonStyle();
-		style.up = skin.getDrawable("SSbuttw");
-		style.down = skin.getDrawable("SSbuttwclick");
-		style.over = skin.getDrawable("SSbuttwclick");
+		style.up = skin.getDrawable("SSbutt");
+		style.down = skin.getDrawable("SSbuttclick");
+		style.over = skin.getDrawable("SSbuttclick");
 		style.font = white;
         
         button_start = new TextButton("Done Early?", style);
