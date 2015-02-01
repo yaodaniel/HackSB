@@ -40,6 +40,7 @@ public class showerSaver extends Game {
 	}	
 	
 	public static void updateTime(float seconds){
+		timer = seconds;
 		minute = (int)(seconds/60);
 		seconds = (int)(seconds%60);
 	}
