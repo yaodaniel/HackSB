@@ -33,7 +33,7 @@ public class timerSetup implements Screen{
 		//timeSetupInputListener listener = new timeSetupInputListener();
 		//Gdx.input.getTextInput(listener, "Timer", null, "shower Time");
 		this.appObject = appObject;
-		displayTimeStyle = new LabelStyle(showerSaver.white,Color.WHITE);
+		displayTimeStyle = new LabelStyle(showerSaver.white,Color.BLACK);
 		stage = new Stage(new ScreenViewport());
 		batch = new SpriteBatch();
 		displayTime = new Label(String.format("%d:%02d",showerSaver.minute, showerSaver.seconds), displayTimeStyle);
@@ -61,7 +61,7 @@ public class timerSetup implements Screen{
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		if(showerSaver.seconds >= 59){
 			showerSaver.minute++;
