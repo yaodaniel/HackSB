@@ -191,5 +191,8 @@ public class mainMenu implements Screen{
 		stage.clear();
 		stage.dispose();
 		button_start.remove();
+		button_history.remove();
+		img.dispose();
+		titleLabel.remove();
 	}
 }

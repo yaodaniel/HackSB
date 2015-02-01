@@ -45,7 +45,7 @@ public class timerSetup implements Screen{
 		displayTimeStyle = new LabelStyle(showerSaver.white,Color.BLACK);
 		stage = new Stage(new ScreenViewport());
 		batch = new SpriteBatch();
-		displayTime = new Label(String.format("%d:%02d Seconds",showerSaver.minute, showerSaver.seconds), displayTimeStyle);
+		displayTime = new Label(String.format("%d min %02d sec",showerSaver.minute, showerSaver.seconds), displayTimeStyle);
 		atlas = showerSaver.loadManager.get("buttons.pack");
 		timerAtlas = showerSaver.loadManager.get("swag.pack");
 		
@@ -195,7 +195,7 @@ public class timerSetup implements Screen{
 				if(checked){
 					clickSound.play();
 					showerSaver.updateTime(showerSaver.timer + 30);
-					displayTime.setText(String.format("%d:%02d Seconds",showerSaver.minute,showerSaver.seconds));
+					displayTime.setText(String.format("%d min %02d sec",showerSaver.minute,showerSaver.seconds));
 				}
 				checked = false;
 			}
@@ -223,7 +223,7 @@ public class timerSetup implements Screen{
 				if(checked){
 					clickSound.play();
 					showerSaver.updateTime(showerSaver.timer - 30);
-					displayTime.setText(String.format("%d:%02d Seconds",showerSaver.minute,showerSaver.seconds));
+					displayTime.setText(String.format("%d min %02d sec",showerSaver.minute,showerSaver.seconds));
 				}
 				checked = false;
 			}
@@ -235,7 +235,6 @@ public class timerSetup implements Screen{
 					checked = true;
 			}
 		});
-		
 		
 		stage.addActor(displayTime);
 		stage.addActor(button_back);
@@ -271,6 +270,15 @@ public class timerSetup implements Screen{
 		skin.dispose();
 		button_back.remove();
 		button_next.remove();
-		
+		button_increaseTime.remove();
+		button_decreaseTime.remove();
+		skin.dispose();
+		timerSkin.dispose();
+		atlas.dispose();
+		timerAtlas.dispose();
+		treeOne.dispose();
+		treeTwo.dispose();
+		treeThree.dispose();
+		clickSound.dispose();
 	}
 }
