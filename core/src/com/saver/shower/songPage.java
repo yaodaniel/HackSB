@@ -21,20 +21,20 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 
 public class songPage extends history implements Screen{
-	Stage stage;
-	showerSaver obj;
-	Music music;
-	BitmapFont white;
-	SpriteBatch batch;
-	Texture img;
-	TextButton button_start, button_history;
-	TextureAtlas atlas;
-	Skin skin;
+	private Stage stage;
+	private showerSaver obj;
+	private Music music;
+	private BitmapFont white;
+	private SpriteBatch batch;
+	private Texture img;
+	private TextButton button_start, button_history;
+	private TextureAtlas atlas;
+	private Skin skin;
+	private boolean checked;
 	
 	float totalTime, timer;
 	public songPage(showerSaver obj){
 		this.obj = obj;
-		
 		img = new Texture("SS2.bmp");
 		batch = new SpriteBatch();
 		atlas = new TextureAtlas(Gdx.files.internal("button.pack"));
@@ -56,23 +56,43 @@ public class songPage extends history implements Screen{
 		style.over = skin.getDrawable("button.down");
 		style.font = white;
         
-        button_start = new TextButton("Stop", style);
+        button_start = new TextButton("Done Early?", style);
+		button_start.setWidth(Gdx.graphics.getWidth()/2.5f);
+		button_start.setHeight(Gdx.graphics.getHeight()/8);
+		button_start.setX(Gdx.graphics.getWidth()/2 + button_start.getWidth()/4);
+		button_start.setY(Gdx.graphics.getHeight() - 1.5f * button_start.getHeight());
+
         stage.addActor(button_start);
-        
 		Gdx.input.setInputProcessor(stage);
 
-        button_start.addListener( new ClickListener() {              
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-               music.stop();
-               saveHistory(60, Math.round(timer));
-               String[] res = getHistory();
-               button_start.setText(res[res.length - 1]);
-            };
-        });
-		
-
-		
+		button_start.addListener(new InputListener() {
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				checked = true;
+				Gdx.app.log(showerSaver.LOG, "Button Checked!");
+				music.stop();
+				//TODO: Add movement to Stats Page Here
+				
+				//Old Debugging Code:
+				//saveHistory(60, Math.round(timer));
+				//String[] res = getHistory();
+				//button_start.setText(res[res.length - 1]);
+				return true;
+			}
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				if(checked)
+					//Gdx.app.log(showerSaver.LOG, "Button Not Checked!");
+					checked = false;
+			}
+			public void touchDragged(InputEvent event, float x, float y, int pointer)
+			{
+				if(!button_start.isPressed()){
+					checked = false;
+					//Gdx.app.log(showerSaver.LOG, "Button [almost] Checked!");
+				}else{
+					checked = true;
+				}
+			}
+		});
 	}
 
 	@Override
@@ -83,6 +103,7 @@ public class songPage extends history implements Screen{
       //FileHandle[] fh = Gdx.files.internal("data/").list();
         
         if (totalTime <= 0){
+        	//TODO: Go to stats page
             music.stop();
         }
 
