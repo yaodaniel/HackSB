@@ -32,16 +32,19 @@ public class songPage extends history implements Screen{
 	private Label displayTime;
 	private BitmapFont white;
 	private SpriteBatch batch;
+	private Texture img;
 	private TextButton button_start;
 	private TextureAtlas atlas;
 	private Skin skin;
 	private boolean checked;
 	private int musicNum;
+	private OrthographicCamera camera;
 	
 	float totalTime, timer;
 	public songPage(showerSaver obj){
 		this.obj = obj;
-		//img = new Texture("SS2.bmp");
+		img = new Texture("SSMusic.png");
+        camera = new OrthographicCamera(600,795);
 		batch = new SpriteBatch();
 		atlas = new TextureAtlas(Gdx.files.internal("button.pack"));
 		skin = new Skin(atlas);
@@ -57,7 +60,7 @@ public class songPage extends history implements Screen{
 	public void show() {
 		totalTime = 750;
 		timer = 750;
-		musicNum = 0;
+		musicNum = obj.songNum;
         music = Gdx.audio.newMusic(Gdx.files.internal("data/"+ musicNum + ".mp3"));
         music.play();
         alerts = Gdx.audio.newMusic(Gdx.files.internal("data/alarm.mp3"));
@@ -84,18 +87,20 @@ public class songPage extends history implements Screen{
         stage.addActor(button_start);
 		Gdx.input.setInputProcessor(stage);
 		
-		music.setOnCompletionListener(new Music.OnCompletionListener() {
-			
-			@Override
-			public void onCompletion(Music music) {
-				musicNum += 1;
-				musicNum %= 4;
-				if (!checked){
-					music = Gdx.audio.newMusic(Gdx.files.internal("data/"+ musicNum + ".mp3"));
-					music.play();	
-				}
-			}
-		});
+		//queueNextSong();
+		
+//		music.setOnCompletionListener(new Music.OnCompletionListener() {
+//			
+//			@Override
+//			public void onCompletion(Music music) {
+//				musicNum += 1;
+//				musicNum %= 4;
+//				if (!checked){
+//					music = Gdx.audio.newMusic(Gdx.files.internal("data/"+ musicNum + ".mp3"));
+//					music.play();	
+//				}
+//			}
+//		});
 
 		button_start.addListener(new InputListener() {
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
@@ -125,12 +130,30 @@ public class songPage extends history implements Screen{
 			}
 		});
 	}
+	
+//	private void queueNextSong(){
+//		music.setOnCompletionListener(new Music.OnCompletionListener() {
+//			
+//			@Override
+//			public void onCompletion(Music music) {
+//				musicNum += 1;
+//				musicNum %= 4;
+//				music.dispose();
+//				if (!checked){
+//					music = Gdx.audio.newMusic(Gdx.files.internal("data/"+ musicNum + ".mp3"));
+//					queueNextSong();
+//					music.play();	
+//				}
+//			}
+//		});
+//	}
 
 	@Override
 	public void render(float delta) {
         Gdx.gl.glClearColor(0,  0,  0,  1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
       //FileHandle[] fh = Gdx.files.internal("data/").list();
         
         if (checked){
@@ -141,14 +164,13 @@ public class songPage extends history implements Screen{
         	this.obj.setScreen(new StatsPage(obj));
         	//redirect stats
         }
-        
-        if (totalTime <= 0){
+        else if (totalTime <= 0){
             music.stop();
-            this.obj.setScreen(new splashScreen(obj));
+            this.obj.setScreen(new StatsPage(obj));
             //redirect fail
         }
         
-        if (totalTime >= 55 && totalTime <= 65){
+        else if (totalTime >= 55 && totalTime <= 65){
         	if (!alerts.isPlaying()){
         		music.pause();
         		alerts.play();
@@ -161,6 +183,13 @@ public class songPage extends history implements Screen{
         		music.play();
         	}
         }
+        else if (!music.isPlaying()){
+			musicNum += 1;
+			musicNum %= 4;
+			music = Gdx.audio.newMusic(Gdx.files.internal("data/"+ musicNum + ".mp3"));
+			//queueNextSong();
+			music.play();	
+        }
 
 
         float deltaTime = Gdx.graphics.getDeltaTime(); 
@@ -168,7 +197,12 @@ public class songPage extends history implements Screen{
         int minutes = ((int)totalTime) / 60;
         int seconds = ((int)totalTime) % 60;
         displayTime.setText(String.format("%d:%02d",minutes, seconds));
+        stage.addActor(displayTime);
+        
         stage.act();
+		batch.begin();
+		batch.draw(img,Gdx.graphics.getWidth()/2-img.getWidth()/2,Gdx.graphics.getHeight()/2-img.getHeight()/2);
+		batch.end();
         batch.begin();
         stage.draw();
         batch.end();
@@ -177,7 +211,17 @@ public class songPage extends history implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
+		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+		camera.update();
+		if(stage == null){
+			stage.getViewport().update(width, height, true);
+		}
+		if(stage.getWidth()!=width || stage.getHeight()!= height){
+			//stage.dispose();
+			stage.getViewport().update(width, height, true);
+		}
+		//stage.clear();
+		Gdx.input.setInputProcessor(stage);
 		
 	}
 
