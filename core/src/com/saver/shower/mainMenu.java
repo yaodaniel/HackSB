@@ -22,7 +22,7 @@ public class mainMenu implements Screen{
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture img;
-	private TextButton button_start, button_history;
+	private TextButton button_start, button_history, button_testPlaylist;
 	private TextureAtlas atlas;
 	private Skin skin;
 	private Stage stage;
@@ -88,16 +88,14 @@ public class mainMenu implements Screen{
 		button_start.setX(Gdx.graphics.getWidth()/2 + button_start.getWidth());
 		button_start.setY(Gdx.graphics.getHeight()/3 - 2*button_start.getHeight());
 		button_start.addListener(new InputListener() {
-			public boolean touchDown (InputEvent event, float x, float y,
-										int pointer, int button) {
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				checked = true;
-				Gdx.app.log(showerSaver.LOG, "Button Checked!");
+				//Gdx.app.log(showerSaver.LOG, "Button Checked!");
 				return true;
 			}
-			public void touchUp(InputEvent event, float x, float y,
-									int pointer, int button) {
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				if(checked){
-					Gdx.app.log(showerSaver.LOG, "Button Not Checked!");
+					//Gdx.app.log(showerSaver.LOG, "Button Not Checked!");
 					appObject.setScreen(new timerSetup(appObject));
 				}
 				checked = false;
@@ -106,7 +104,7 @@ public class mainMenu implements Screen{
 			{
 				if(!button_start.isPressed()){
 					checked = false;
-					Gdx.app.log(showerSaver.LOG, "Button [almost] Checked!");
+					//Gdx.app.log(showerSaver.LOG, "Button [almost] Checked!");
 				}else{
 					checked = true;
 				}
@@ -140,8 +138,36 @@ public class mainMenu implements Screen{
 				}
 			}
 		});
+		
+		//Testing Button
+		button_testPlaylist = new TextButton("TestPlaylist", style);
+		button_testPlaylist.setWidth(Gdx.graphics.getWidth()/4.5f);
+		button_testPlaylist.setHeight(Gdx.graphics.getHeight()/5);
+		button_testPlaylist.setX(Gdx.graphics.getWidth()/2 - 2*button_start.getWidth());
+		button_testPlaylist.setY(Gdx.graphics.getHeight()/3);
+		button_testPlaylist.addListener(new InputListener() {
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				checked = true;
+				return true;
+			}
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				if(checked)
+				appObject.setScreen(new playlistScreen(appObject));
+				checked = false;
+			}
+			public void touchDragged(InputEvent event, float x, float y, int pointer)
+			{
+				if(!button_testPlaylist.isPressed()){
+					checked = false;
+				}else{
+					checked = true;
+				}
+			}
+		});
+
 		stage.addActor(button_start);
 		stage.addActor(button_history);
+		stage.addActor(button_testPlaylist);
 	}
 
 	@Override
