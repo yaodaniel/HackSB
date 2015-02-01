@@ -21,16 +21,21 @@ public class showerSaver extends Game {
 	
 	@Override
 	public void create() {
+		loadManager.load("gamefont_0.png", Texture.class);
+		loadManager.load("gamefont_1.png", Texture.class);
+		loadManager.load("gamefont.fnt", BitmapFont.class);
 		//Set Permissions
 		//getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		
-		loadManager.load("gamefont_0.png",Texture.class);
-		loadManager.load("gamefont_1.png",Texture.class);
-		loadManager.load("gamefont.fnt",BitmapFont.class);
 		loadManager.load("button.pack", TextureAtlas.class);
 		loadManager.load("button.png", Texture.class);
 		loadManager.load("buttons.pack", TextureAtlas.class);
 		loadManager.load("buttons.png", Texture.class);
+		loadManager.load("swag.pack", TextureAtlas.class);
+		loadManager.load("swag.png", Texture.class);
+		loadManager.load("SS2.bmp", Texture.class);
+		loadManager.load("SS3.bmp", Texture.class);
+		loadManager.load("SS4.bmp", Texture.class);
+		loadManager.load("SS5.bmp", Texture.class);
 		setScreen(new splashScreen(this));
 	}	
 	

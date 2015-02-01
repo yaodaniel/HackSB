@@ -58,8 +58,8 @@ public class songPage extends history implements Screen{
 
 	@Override
 	public void show() {
-		totalTime = 750;
-		timer = 750;
+		totalTime = showerSaver.timer;
+		timer = showerSaver.timer;
 		musicNum = obj.songNum;
         music = Gdx.audio.newMusic(Gdx.files.internal("data/"+ musicNum + ".mp3"));
         music.play();
