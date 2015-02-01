@@ -86,18 +86,15 @@ public class splashScreen implements Screen{
 	@Override
 	public void pause() {
 		
-		
 	}
 
 	@Override
 	public void resume() {
 		
-		
 	}
 
 	@Override
 	public void hide() {
-		dispose();
 		
 	}
 

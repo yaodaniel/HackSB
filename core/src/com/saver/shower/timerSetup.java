@@ -70,7 +70,7 @@ public class timerSetup implements Screen{
 		timerStyleDecrease.font = showerSaver.white;
 		
 		button_back = new TextButton("<", style);
-		button_next = new TextButton(">", style);
+		button_next = new TextButton("GO!", style);
 		button_increaseTime = new TextButton("",timerStyleIncrease);
 		button_decreaseTime = new TextButton("",timerStyleDecrease);
 		

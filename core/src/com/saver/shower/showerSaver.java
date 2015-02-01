@@ -1,6 +1,8 @@
 package com.saver.shower;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,6 +24,7 @@ public class showerSaver extends Game {
 	
 	@Override
 	public void create() {
+		Gdx.input.setCatchBackKey(true);
 		loadManager.load("gamefont_0.png", Texture.class);
 		loadManager.load("gamefont_1.png", Texture.class);
 		loadManager.load("gamefont.fnt", BitmapFont.class);
@@ -41,6 +44,9 @@ public class showerSaver extends Game {
 		loadManager.load("sadTree.png", Texture.class);
 		loadManager.load("verySadTree.png", Texture.class);
 		loadManager.load("data/CLICK12A.mp3", Sound.class);
+		if(Gdx.input.isKeyPressed(Input.Keys.BACK))
+			Gdx.app.exit();
+		
 		setScreen(new splashScreen(this));
 	}	
 	
