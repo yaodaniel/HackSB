@@ -28,7 +28,7 @@ public class StatsPage extends history implements Screen{
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture img, treeOne, treeTwo, treeThree;
-	private TextButton button_restart;
+	private TextButton button_restart, button_clearHist;
 	private TextureAtlas atlas;
 	private Skin skin;
 	private Stage stage;
@@ -94,7 +94,7 @@ public class StatsPage extends history implements Screen{
 			displayStats = new Label(String.format("Average Shower Time: %d min %d sec\n Longest Shower: %d min %d sec\n Shortest Shower: %d min %d sec\n", avgMin, avgSec, longMin, longSec, shortMin, shortSec), displayStatsStyle);
 		}else{
 			displayStatsStyle = new LabelStyle(showerSaver.white,Color.RED);
-			displayStats = new Label(String.format("Your tardy time\n for this time is %d min %d sec...\nAverage Shower Time: %d min %d sec\n Longest Shower: %d min %d sec\n Shortest Shower: %d min %d sec\n", (int)overtimeVal/60,(int)overtimeVal%60, avgMin, avgSec, longMin, longSec, shortMin, shortSec), displayStatsStyle);			
+			displayStats = new Label(String.format("Your tardy time\n for this time is %d min %d sec...\n\nAverage Shower Time: %d min %d sec\n Longest Shower: %d min %d sec\n Shortest Shower: %d min %d sec\n", (int)overtimeVal/60,(int)overtimeVal%60, avgMin, avgSec, longMin, longSec, shortMin, shortSec), displayStatsStyle);			
 		}
 		
 		treeOne = showerSaver.loadManager.get("happyTree.png");
@@ -156,6 +156,35 @@ public class StatsPage extends history implements Screen{
 		style.down = skin.getDrawable("SSbuttclick");
 		style.over = skin.getDrawable("SSbuttclick");
 		style.font = showerSaver.white;
+		style.font.setScale(1.0f);
+		
+		button_clearHist = new TextButton("Clear History", style);
+		button_clearHist.setWidth(Gdx.graphics.getWidth()/4.5f);
+		button_clearHist.setHeight(Gdx.graphics.getHeight()/8);
+		button_clearHist.setX(Gdx.graphics.getWidth()/2 + button_clearHist.getWidth());
+		button_clearHist.setY(Gdx.graphics.getHeight()/3 + 3*button_clearHist.getHeight());
+		button_clearHist.addListener(new InputListener() {
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+				checked = true;
+				return true;
+			}
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				if(checked){
+					deleteHistory();
+					object.setScreen(new StatsPage(object));
+				}
+				checked = false;
+			}
+			public void touchDragged(InputEvent event, float x, float y, int pointer)
+			{
+				if(!button_clearHist.isPressed()){
+					checked = false;
+				}else{
+					checked = true;
+				}
+			}
+		});
+		
 		button_restart = new TextButton(">", style);
 		button_restart.setWidth(Gdx.graphics.getWidth()/4.5f);
 		button_restart.setHeight(Gdx.graphics.getHeight()/8);
@@ -185,6 +214,7 @@ public class StatsPage extends history implements Screen{
 			}
 		});
 		stage.addActor(button_restart);
+		stage.addActor(button_clearHist);
 	}
 
 	@Override

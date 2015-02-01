@@ -10,7 +10,7 @@ public class history {
 
     public void saveHistory(int goalSecs, int actualSecs){
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd:HH");
-        Preferences prefs = Gdx.app.getPreferences("test1");
+        Preferences prefs = Gdx.app.getPreferences("showersaver");
         int numLines = prefs.getInteger("numLines", 0);
         Date date = new Date();
         String entry = dateFormat.format(date) + " " + goalSecs + " " + actualSecs;
@@ -21,13 +21,23 @@ public class history {
     
     //array of "yyyy/mm/dd goalSecs actualSecs" 
     public String[] getHistory(){
-        Preferences prefs = Gdx.app.getPreferences("test1");
+        Preferences prefs = Gdx.app.getPreferences("showersaver");
         int numLines = prefs.getInteger("numLines", 0);
         String[] res = new String[numLines];
         for(int i = 0; i < numLines; i++){
             res[i] = prefs.getString(Integer.toString(i));
         }
         return res;
+    }
+
+    public void deleteHistory(){
+        Preferences prefs = Gdx.app.getPreferences("showersaver");
+        prefs.clear();
+        int numLines = prefs.getInteger("numLines", 0);
+        for(int i = 0; i < numLines; i++){
+            prefs.remove(prefs.getString(Integer.toString(i)));
+        }
+        prefs.flush();
     }
 	
 }
