@@ -92,7 +92,7 @@ public class mainMenu implements Screen{
 		Gdx.input.setInputProcessor(stage);
 		
 		titleLabel.setX(0);
-		titleLabel.setY(Gdx.graphics.getHeight()- 1.5f*titleLabel.getHeight());
+		titleLabel.setY(Gdx.graphics.getHeight()/2);
 		titleLabel.setWidth(width);
 		titleLabel.setAlignment(Align.center);
 		titleLabel.setFontScale(2.5f);

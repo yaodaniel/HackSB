@@ -99,7 +99,7 @@ public class playlistScreen implements Screen{
 		button_p2 = new TextButton("Playlist num 2", style);
 		button_p3 = new TextButton("Shower Time", style);
 		button_p4 = new TextButton("Homework Playlist", style);
-		btnBack = new TextButton("<--", style);
+		btnBack = new TextButton("<", style);
 
 		button_p1.setWidth(Gdx.graphics.getWidth()/1.5f);
 		button_p2.setWidth(Gdx.graphics.getWidth()/1.5f);
@@ -186,7 +186,7 @@ public class playlistScreen implements Screen{
 		btnBack.addListener(new InputListener() {
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {checked = true;return true;}
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if(checked){object.setScreen(new mainMenu(object));}
+				if(checked){object.setScreen(new timerSetup(object));}
 				checked = false;
 			}
 			public void touchDragged(InputEvent event, float x, float y, int pointer){
