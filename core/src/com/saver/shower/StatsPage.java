@@ -106,7 +106,7 @@ public class StatsPage extends history implements Screen{
 		stage.act(delta);
 		batch.begin();
 		if(avgVal < 480)
-			batch.draw(treeOne, Gdx.graphics.getWidth()/2 - treeOne.getWidth(),Gdx.graphics.getHeight()/8,2*treeOne.getWidth(),2*treeOne.getHeight());
+		batch.draw(treeOne, Gdx.graphics.getWidth()/2 - treeOne.getWidth(),Gdx.graphics.getHeight()/8,2*treeOne.getWidth(),2*treeOne.getHeight());
 		else if(avgVal >= 480 && avgVal < 900)
 			batch.draw(treeTwo,Gdx.graphics.getWidth()/2 - treeTwo.getWidth(),Gdx.graphics.getHeight()/8,2*treeTwo.getWidth(),2*treeTwo.getHeight());
 		else if(avgVal >= 900)
