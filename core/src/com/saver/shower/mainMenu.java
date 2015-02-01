@@ -119,23 +119,22 @@ public class mainMenu implements Screen{
 		button_history.setX(Gdx.graphics.getWidth()/2 - 2*button_start.getWidth());
 		button_history.setY(Gdx.graphics.getHeight()/3 - 2*button_start.getHeight());
 		button_history.addListener(new InputListener() {
-			public boolean touchDown (InputEvent event, float x, float y,
-										int pointer, int button) {
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				checked = true;
-				Gdx.app.log(showerSaver.LOG, "Button Checked!");
+				//Gdx.app.log(showerSaver.LOG, "Button Checked!");
 				return true;
 			}
-			public void touchUp(InputEvent event, float x, float y,
-									int pointer, int button) {
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				if(checked)
-				Gdx.app.log(showerSaver.LOG, "Button Not Checked!");
+				//Gdx.app.log(showerSaver.LOG, "Button Not Checked!");
+				appObject.setScreen(new StatsPage(appObject));
 				checked = false;
 			}
 			public void touchDragged(InputEvent event, float x, float y, int pointer)
 			{
 				if(!button_start.isPressed()){
 					checked = false;
-					Gdx.app.log(showerSaver.LOG, "Button [almost] Checked!");
+					//Gdx.app.log(showerSaver.LOG, "Button [almost] Checked!");
 				}else{
 					checked = true;
 				}
