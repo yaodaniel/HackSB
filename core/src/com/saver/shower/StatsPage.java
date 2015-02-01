@@ -42,7 +42,7 @@ public class StatsPage extends history implements Screen{
 		img = new Texture("SS2.bmp");
 		batch = new SpriteBatch();
 		//Button Stuff
-		atlas = new TextureAtlas(Gdx.files.internal("button.pack"));
+		atlas = new TextureAtlas(Gdx.files.internal("buttons.pack"));
 		skin = new Skin(atlas);
 		stage = new Stage(new ScreenViewport());
 		showerSaver.white = showerSaver.loadManager.get("gamefont.fnt", BitmapFont.class);
@@ -142,9 +142,9 @@ public class StatsPage extends history implements Screen{
 		stage.addActor(displayStats);
 		
 		TextButtonStyle style = new TextButtonStyle();
-		style.up = skin.getDrawable("button.up");
-		style.down = skin.getDrawable("button.down");
-		style.over = skin.getDrawable("button.down");
+		style.up = skin.getDrawable("SSbutt");
+		style.down = skin.getDrawable("SSbuttclick");
+		style.over = skin.getDrawable("SSbuttclick");
 		style.font = showerSaver.white;
 		button_restart = new TextButton("-->", style);
 		button_restart.setWidth(Gdx.graphics.getWidth()/4.5f);
