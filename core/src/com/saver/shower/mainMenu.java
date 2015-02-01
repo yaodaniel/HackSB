@@ -2,6 +2,7 @@ package com.saver.shower;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,9 +12,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 
@@ -27,20 +31,27 @@ public class mainMenu implements Screen{
 	private Skin skin;
 	private Stage stage;
 	private boolean checked;
+	private LabelStyle titleLabelStyle;
+	private Label titleLabel;
 	
 	public mainMenu(showerSaver appObject){
 		this.appObject = appObject;
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        /*camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+		//camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        camera = new OrthographicCamera(600,795);
+		/*camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
         camera.update();*/
 		//camera.setToOrtho(false, 800, 600);
-		img = new Texture("SS2.bmp");
+		//img = new Texture("SS2.bmp");
+		img = new Texture("SSbg.png");
 		batch = new SpriteBatch();
 		//Button Stuff
 		atlas = showerSaver.loadManager.get("button.pack");
 		skin = new Skin(atlas);
 		stage = new Stage(new ScreenViewport());
 		showerSaver.white = showerSaver.loadManager.get("gamefont.fnt", BitmapFont.class);
+		//Create Label
+		titleLabelStyle = new LabelStyle(showerSaver.white,Color.BLACK);
+		titleLabel = new Label(String.format("Shower Saver\n"), titleLabelStyle);
 	}
 
 	@Override
@@ -56,18 +67,20 @@ public class mainMenu implements Screen{
 		batch.setProjectionMatrix(camera.combined);
 		stage.act(delta);
 		batch.begin();
-		stage.draw();
-		batch.end();
-		batch.begin();
 		batch.draw(img,Gdx.graphics.getWidth()/2-img.getWidth()/2,Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		batch.end();
+		batch.begin();
+		stage.draw();
+		batch.end();
+
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		//camera.setToOrtho(false, width/2, height/2);
 		camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-        camera.update();
+        //camera.setToOrtho(false,600,795);
+		camera.update();
 		if(stage == null){
 			stage.getViewport().update(width, height, true);
 		}
@@ -77,6 +90,14 @@ public class mainMenu implements Screen{
 		}
 		stage.clear();
 		Gdx.input.setInputProcessor(stage);
+		
+		titleLabel.setX(0);
+		titleLabel.setY(Gdx.graphics.getHeight()- 1.5f*titleLabel.getHeight());
+		titleLabel.setWidth(width);
+		titleLabel.setAlignment(Align.center);
+		titleLabel.setFontScale(2.5f);
+		stage.addActor(titleLabel);		
+		
 		TextButtonStyle style = new TextButtonStyle();
 		style.up = skin.getDrawable("button.up");
 		style.down = skin.getDrawable("button.down");

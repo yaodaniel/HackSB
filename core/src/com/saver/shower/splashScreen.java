@@ -35,7 +35,7 @@ public class splashScreen implements Screen{
 
 	@Override
 	public void show() {
-		splashTexture = new Texture("splashscreen.jpeg");
+		splashTexture = new Texture("SS10.png");
 		splashTexture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		splashSprite = new Sprite(splashTexture);
@@ -78,7 +78,7 @@ public class splashScreen implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		camera.setToOrtho(false, 800, 600);
+		camera.setToOrtho(false, 600, 795);
 		//camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
         //camera.update();
 	}

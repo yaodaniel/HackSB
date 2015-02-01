@@ -16,6 +16,7 @@ public class showerSaver extends Game {
 	public static final String LOG = "Hackathon_app";
 	public static AssetManager loadManager = new AssetManager();
 	public static BitmapFont white;
+	public int songNum;
 	//public static Skin buttonSkin;
 	
 	@Override
@@ -37,4 +38,9 @@ public class showerSaver extends Game {
 		loadManager.load("SS5.bmp", Texture.class);
 		setScreen(new splashScreen(this));
 	}	
+	
+	public static void updateTime(float seconds){
+		minute = (int)(seconds/60);
+		seconds = (int)(seconds%60);
+	}
 }
