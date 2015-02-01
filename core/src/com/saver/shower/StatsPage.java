@@ -115,11 +115,14 @@ public class StatsPage extends history implements Screen{
 		stage.act(delta);
 		batch.begin();
 		if(avgVal < 480)
-		batch.draw(treeOne, Gdx.graphics.getWidth()/2 - treeOne.getWidth(),Gdx.graphics.getHeight()/8,2*treeOne.getWidth(),2*treeOne.getHeight());
+			batch.draw(treeOne, 0,0,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+			//batch.draw(treeOne, Gdx.graphics.getWidth()/2 - treeOne.getWidth(),Gdx.graphics.getHeight()/8,2*treeOne.getWidth(),2*treeOne.getHeight());
 		else if(avgVal >= 480 && avgVal < 900)
-			batch.draw(treeTwo,Gdx.graphics.getWidth()/2 - treeTwo.getWidth(),Gdx.graphics.getHeight()/8,2*treeTwo.getWidth(),2*treeTwo.getHeight());
+			batch.draw(treeTwo,0,0,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+			//batch.draw(treeTwo,Gdx.graphics.getWidth()/2 - treeTwo.getWidth(),Gdx.graphics.getHeight()/8,2*treeTwo.getWidth(),2*treeTwo.getHeight());
 		else if(avgVal >= 900)
-			batch.draw(treeThree,Gdx.graphics.getWidth()/2 - treeThree.getWidth(),Gdx.graphics.getHeight()/8,2*treeThree.getWidth(),2*treeThree.getHeight());
+			batch.draw(treeThree,0,0,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+			//batch.draw(treeThree,Gdx.graphics.getWidth()/2 - treeThree.getWidth(),Gdx.graphics.getHeight()/8,2*treeThree.getWidth(),2*treeThree.getHeight());
 		batch.end();
 
 		batch.begin();
@@ -159,10 +162,10 @@ public class StatsPage extends history implements Screen{
 		style.font.setScale(1.0f);
 		
 		button_clearHist = new TextButton("Clear History", style);
-		button_clearHist.setWidth(Gdx.graphics.getWidth()/4.5f);
-		button_clearHist.setHeight(Gdx.graphics.getHeight()/8);
-		button_clearHist.setX(Gdx.graphics.getWidth()/2 + button_clearHist.getWidth());
-		button_clearHist.setY(Gdx.graphics.getHeight()/3 + 3*button_clearHist.getHeight());
+		button_clearHist.setWidth(Gdx.graphics.getWidth()/2.5f);
+		button_clearHist.setHeight(Gdx.graphics.getHeight()/10);
+		button_clearHist.setX(Gdx.graphics.getWidth()/2 + button_clearHist.getWidth()/6);
+		button_clearHist.setY(Gdx.graphics.getHeight()/2 + 3*(button_clearHist.getHeight()+10));
 		button_clearHist.addListener(new InputListener() {
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
 				checked = true;
