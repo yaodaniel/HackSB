@@ -26,7 +26,7 @@ public class playlistScreen implements Screen{
 	private Label displayPlaylist;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	private TextButton button_p1,button_p2, button_p3, button_p4;
+	private TextButton button_p1,button_p2, button_p3, button_p4, btnBack;
 	private TextureAtlas atlas;
 	private Skin skin;
 	private Stage stage;
@@ -99,31 +99,40 @@ public class playlistScreen implements Screen{
 		button_p2 = new TextButton("Playlist num 2", style);
 		button_p3 = new TextButton("Shower Time", style);
 		button_p4 = new TextButton("Homework Playlist", style);
+		btnBack = new TextButton("<--", style);
 
 		button_p1.setWidth(Gdx.graphics.getWidth()/1.5f);
 		button_p2.setWidth(Gdx.graphics.getWidth()/1.5f);
 		button_p3.setWidth(Gdx.graphics.getWidth()/1.5f);
 		button_p4.setWidth(Gdx.graphics.getWidth()/1.5f);
+		btnBack.setWidth(Gdx.graphics.getWidth()/4.5f);
 		
 		button_p1.setHeight(Gdx.graphics.getHeight()/10);
 		button_p2.setHeight(Gdx.graphics.getHeight()/10);
 		button_p3.setHeight(Gdx.graphics.getHeight()/10);
 		button_p4.setHeight(Gdx.graphics.getHeight()/10);
+		btnBack.setHeight(Gdx.graphics.getHeight()/10);
 		
 		button_p1.setX(Gdx.graphics.getWidth()/2 - button_p1.getWidth()/2);
 		button_p2.setX(Gdx.graphics.getWidth()/2 - button_p2.getWidth()/2);
 		button_p3.setX(Gdx.graphics.getWidth()/2 - button_p3.getWidth()/2);
 		button_p4.setX(Gdx.graphics.getWidth()/2 - button_p4.getWidth()/2);
+		btnBack.setX(Gdx.graphics.getWidth()/2 - 2*btnBack.getWidth());
 		
-		button_p1.setY(Gdx.graphics.getHeight() - 3*button_p1.getHeight());
-		button_p2.setY(Gdx.graphics.getHeight() - 4*button_p2.getHeight());
-		button_p3.setY(Gdx.graphics.getHeight() - 5*button_p3.getHeight());
-		button_p4.setY(Gdx.graphics.getHeight() - 6*button_p4.getHeight());
+		
+		button_p1.setY(Gdx.graphics.getHeight() - 3*(button_p1.getHeight()+8));
+		button_p2.setY(Gdx.graphics.getHeight() - 4*(button_p2.getHeight()+8));
+		button_p3.setY(Gdx.graphics.getHeight() - 5*(button_p3.getHeight()+8));
+		button_p4.setY(Gdx.graphics.getHeight() - 6*(button_p4.getHeight()+8));
+		btnBack.setY(Gdx.graphics.getHeight() - 9.5f*(button_p4.getHeight()));
 		
 		button_p1.addListener(new InputListener() {
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {checked = true;return true;}
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if(checked){object.setScreen(new mainMenu(object));}
+				if(checked){
+					object.songNum = 0;
+					object.setScreen(new songPage(object));				
+				}
 				checked = false;
 			}
 			public void touchDragged(InputEvent event, float x, float y, int pointer){
@@ -134,7 +143,10 @@ public class playlistScreen implements Screen{
 		button_p2.addListener(new InputListener() {
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {checked = true;return true;}
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if(checked){object.setScreen(new mainMenu(object));}
+				if(checked){
+					object.songNum = 1;
+					object.setScreen(new songPage(object));
+				}
 				checked = false;
 			}
 			public void touchDragged(InputEvent event, float x, float y, int pointer){
@@ -145,7 +157,10 @@ public class playlistScreen implements Screen{
 		button_p3.addListener(new InputListener() {
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {checked = true;return true;}
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if(checked){object.setScreen(new mainMenu(object));}
+				if(checked){
+					object.songNum = 2;
+					object.setScreen(new songPage(object));
+				}
 				checked = false;
 			}
 			public void touchDragged(InputEvent event, float x, float y, int pointer){
@@ -157,7 +172,10 @@ public class playlistScreen implements Screen{
 		button_p4.addListener(new InputListener() {
 			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {checked = true;return true;}
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if(checked){object.setScreen(new mainMenu(object));}
+				if(checked){
+					object.songNum = 3;
+					object.setScreen(new songPage(object));
+				}
 				checked = false;
 			}
 			public void touchDragged(InputEvent event, float x, float y, int pointer){
@@ -165,10 +183,22 @@ public class playlistScreen implements Screen{
 			}
 		});
 
+		btnBack.addListener(new InputListener() {
+			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {checked = true;return true;}
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				if(checked){object.setScreen(new mainMenu(object));}
+				checked = false;
+			}
+			public void touchDragged(InputEvent event, float x, float y, int pointer){
+				if(!(btnBack).isPressed()){checked = false;}else{checked = true;}
+			}
+		});
+
 		stage.addActor(button_p1);
 		stage.addActor(button_p2);
 		stage.addActor(button_p3);
 		stage.addActor(button_p4);
+		stage.addActor(btnBack);
 		
 	}
 
