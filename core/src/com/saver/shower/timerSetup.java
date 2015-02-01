@@ -33,7 +33,7 @@ public class timerSetup implements Screen{
 		//timeSetupInputListener listener = new timeSetupInputListener();
 		//Gdx.input.getTextInput(listener, "Timer", null, "shower Time");
 		this.appObject = appObject;
-		displayTimeStyle = new LabelStyle(showerSaver.white,Color.BLACK);
+		displayTimeStyle = new LabelStyle(showerSaver.white,Color.WHITE);
 		stage = new Stage(new ScreenViewport());
 		batch = new SpriteBatch();
 		displayTime = new Label(String.format("%d:%02d",showerSaver.minute, showerSaver.seconds), displayTimeStyle);
@@ -45,6 +45,10 @@ public class timerSetup implements Screen{
 		style.over = skin.getDrawable("SSbuttclick");
 		style.font = showerSaver.white;
 		button_back = new TextButton("<--", style);
+		button_back.setWidth(Gdx.graphics.getWidth()/7f);
+		button_back.setHeight(Gdx.graphics.getHeight()/10f);
+		button_back.setX(Gdx.graphics.getWidth()/4 - button_back.getWidth()/2);
+		button_back.setY(button_back.getHeight());
 		button_next = new TextButton("-->", style);
 		stage = new Stage(new ScreenViewport());
 	}
@@ -57,7 +61,7 @@ public class timerSetup implements Screen{
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		if(showerSaver.seconds >= 59){
 			showerSaver.minute++;
@@ -93,20 +97,8 @@ public class timerSetup implements Screen{
 		displayTime.setWidth(width);
 		displayTime.setAlignment(Align.center);
 		displayTime.setFontScale(1.3f);
-		
-		button_next.setWidth(Gdx.graphics.getWidth()/4.5f);
-		button_next.setHeight(Gdx.graphics.getHeight()/8f);
-		button_next.setX(Gdx.graphics.getWidth()/2 + button_next.getWidth());
-		button_next.setY(Gdx.graphics.getHeight()/3 - 2*button_next.getHeight());
-		
-		button_back.setWidth(Gdx.graphics.getWidth()/4.5f);
-		button_back.setHeight(Gdx.graphics.getHeight()/8f);
-		button_back.setX(Gdx.graphics.getWidth()/2 - 2*button_back.getWidth());
-		button_back.setY(Gdx.graphics.getHeight()/3 - 2*button_back.getHeight());
-		
 		stage.addActor(displayTime);
 		stage.addActor(button_back);
-		stage.addActor(button_next);
 	}
 
 	@Override
@@ -132,5 +124,4 @@ public class timerSetup implements Screen{
 		// TODO Auto-generated method stub
 		
 	}
-
 }
