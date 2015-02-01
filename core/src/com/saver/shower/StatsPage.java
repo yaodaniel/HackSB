@@ -26,7 +26,7 @@ public class StatsPage extends history implements Screen{
 	private Label displayStats;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	private Texture img;
+	private Texture img, treeOne, treeTwo, treeThree;
 	private TextButton button_restart;
 	private TextureAtlas atlas;
 	private Skin skin;
@@ -85,8 +85,12 @@ public class StatsPage extends history implements Screen{
 		shortSec = (int)(minVal%60);
 
 		//Create Label
-		displayStatsStyle = new LabelStyle(showerSaver.white,Color.WHITE);
+		displayStatsStyle = new LabelStyle(showerSaver.white,Color.BLACK);
 		displayStats = new Label(String.format("Average Shower Time: %d min %d sec\n Longest Shower: %d min %d sec\n Shortest Shower: %d min %d sec\n", avgMin, avgSec, longMin, longSec, shortMin, shortSec), displayStatsStyle);
+		
+		treeOne = showerSaver.loadManager.get("SS3.bmp");
+		treeTwo = showerSaver.loadManager.get("SS4.bmp");
+		treeThree = showerSaver.loadManager.get("SS5.bmp");
 	}
 	
 	@Override
@@ -97,13 +101,23 @@ public class StatsPage extends history implements Screen{
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(delta);
 		batch.begin();
+		if(avgVal < 480)
+			batch.draw(treeOne, Gdx.graphics.getWidth()/2 - treeOne.getWidth(),Gdx.graphics.getHeight()/8,2*treeOne.getWidth(),2*treeOne.getHeight());
+		else if(avgVal >= 480 && avgVal < 900)
+			batch.draw(treeTwo,Gdx.graphics.getWidth()/2 - treeTwo.getWidth(),Gdx.graphics.getHeight()/8,2*treeTwo.getWidth(),2*treeTwo.getHeight());
+		else if(avgVal >= 900)
+			batch.draw(treeThree,Gdx.graphics.getWidth()/2 - treeThree.getWidth(),Gdx.graphics.getHeight()/8,2*treeThree.getWidth(),2*treeThree.getHeight());
+		batch.end();
+
+		batch.begin();
 		stage.draw();
 		batch.end();
-		
+
+
 	}
 
 	@Override

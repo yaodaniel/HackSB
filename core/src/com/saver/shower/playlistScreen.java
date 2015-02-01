@@ -45,7 +45,7 @@ public class playlistScreen implements Screen{
 		stage = new Stage(new ScreenViewport());
 		showerSaver.white = showerSaver.loadManager.get("gamefont.fnt", BitmapFont.class);
 		//Create Label
-		displayPlaylistTitle = new LabelStyle(showerSaver.white,Color.WHITE);
+		displayPlaylistTitle = new LabelStyle(showerSaver.white,Color.BLACK);
 		displayPlaylist = new Label(String.format("Select A Playlist:\n"), displayPlaylistTitle);
 	}
 	
@@ -57,7 +57,7 @@ public class playlistScreen implements Screen{
 
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0,0,0,1);
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);

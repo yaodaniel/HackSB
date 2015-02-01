@@ -26,7 +26,7 @@ public class mainMenu implements Screen{
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture img;
-	private TextButton button_start, button_history, button_testPlaylist;
+	private TextButton button_start, button_history;
 	private TextureAtlas atlas;
 	private Skin skin;
 	private Stage stage;
@@ -160,35 +160,8 @@ public class mainMenu implements Screen{
 			}
 		});
 		
-		//Testing Button
-		button_testPlaylist = new TextButton("TestPlaylist", style);
-		button_testPlaylist.setWidth(Gdx.graphics.getWidth()/4.5f);
-		button_testPlaylist.setHeight(Gdx.graphics.getHeight()/5);
-		button_testPlaylist.setX(Gdx.graphics.getWidth()/2 - 2*button_start.getWidth());
-		button_testPlaylist.setY(Gdx.graphics.getHeight()/3);
-		button_testPlaylist.addListener(new InputListener() {
-			public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-				checked = true;
-				return true;
-			}
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				if(checked)
-				appObject.setScreen(new playlistScreen(appObject));
-				checked = false;
-			}
-			public void touchDragged(InputEvent event, float x, float y, int pointer)
-			{
-				if(!button_testPlaylist.isPressed()){
-					checked = false;
-				}else{
-					checked = true;
-				}
-			}
-		});
-
 		stage.addActor(button_start);
 		stage.addActor(button_history);
-		stage.addActor(button_testPlaylist);
 	}
 
 	@Override

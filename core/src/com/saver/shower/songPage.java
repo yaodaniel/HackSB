@@ -43,7 +43,7 @@ public class songPage extends history implements Screen{
 	float totalTime, timer;
 	public songPage(showerSaver obj){
 		this.obj = obj;
-		img = new Texture("SSMusic.png");
+		img = new Texture("note.png");
         camera = new OrthographicCamera(600,795);
 		batch = new SpriteBatch();
 		atlas = new TextureAtlas(Gdx.files.internal("button.pack"));
