@@ -159,16 +159,17 @@ public class songPage extends history implements Screen{
         if (checked){
         	alerts.setLooping(false);
         	alerts.dispose();
+        	music.pause();
         	music.dispose();
         	
         	this.obj.setScreen(new StatsPage(obj));
         	//redirect stats
         }
-        else if (totalTime <= 0){
-            music.stop();
-            this.obj.setScreen(new StatsPage(obj));
-            //redirect fail
-        }
+        // else if (totalTime <= 0){
+        //     music.stop();
+        //     this.obj.setScreen(new StatsPage(obj));
+        //     //redirect fail
+        // }
         
         else if (totalTime >= 55 && totalTime <= 65){
         	if (!alerts.isPlaying()){
@@ -176,7 +177,7 @@ public class songPage extends history implements Screen{
         		alerts.play();
         	}
         }
-        else if(totalTime < 55){
+        else if(totalTime < 55 && totalTime >= 50){
         	if (alerts.isPlaying()){
         		alerts.setLooping(false);
         		alerts.pause();
@@ -196,7 +197,12 @@ public class songPage extends history implements Screen{
         totalTime -= deltaTime;
         int minutes = ((int)totalTime) / 60;
         int seconds = ((int)totalTime) % 60;
-        displayTime.setText(String.format("%d:%02d",minutes, seconds));
+        String prepend = totalTime < 0? "-": "";
+        if (totalTime < 0) 
+        	button_start.setText("Tardy..."); 
+        displayTime.setText(prepend + String.format("%d:%02d",Math.abs(minutes), Math.abs(seconds))); 
+       
+        
         stage.addActor(displayTime);
         
         stage.act();
