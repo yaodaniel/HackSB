@@ -37,7 +37,7 @@ public class mainMenu implements Screen{
 		img = new Texture("SS2.bmp");
 		batch = new SpriteBatch();
 		//Button Stuff
-		atlas = new TextureAtlas(Gdx.files.internal("button.pack"));
+		atlas = showerSaver.loadManager.get("button.pack");
 		skin = new Skin(atlas);
 		stage = new Stage(new ScreenViewport());
 		showerSaver.white = showerSaver.loadManager.get("gamefont.fnt", BitmapFont.class);
