@@ -29,6 +29,8 @@ public class showerSaver extends Game {
 		loadManager.load("button.png", Texture.class);
 		loadManager.load("buttons.pack", TextureAtlas.class);
 		loadManager.load("buttons.png", Texture.class);
+		loadManager.load("swag.pack", TextureAtlas.class);
+		loadManager.load("swag.png", Texture.class);
 		loadManager.load("SS2.bmp", Texture.class);
 		loadManager.load("SS3.bmp", Texture.class);
 		loadManager.load("SS4.bmp", Texture.class);
