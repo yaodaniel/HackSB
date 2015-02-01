@@ -2,6 +2,7 @@ package com.saver.shower;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -39,6 +40,7 @@ public class showerSaver extends Game {
 		loadManager.load("happyTree.png", Texture.class);
 		loadManager.load("sadTree.png", Texture.class);
 		loadManager.load("verySadTree.png", Texture.class);
+		loadManager.load("data/CLICK12A.mp3", Sound.class);
 		setScreen(new splashScreen(this));
 	}	
 	

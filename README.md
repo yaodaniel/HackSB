@@ -1,2 +1,2 @@
 # HackSB
-Using OpenGov API at: http://docs.governmententitiesapi.apiary.io/#introduction/useful-information
+Goal: Android App to help raise awareness for water saving.

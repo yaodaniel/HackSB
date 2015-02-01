@@ -2,6 +2,7 @@ package com.saver.shower;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -33,6 +34,7 @@ public class timerSetup implements Screen{
 	private TextureAtlas atlas, timerAtlas;
 	private Texture treeOne, treeTwo, treeThree;
 	private boolean checked = false;
+	private Sound clickSound;
 	
 	public timerSetup(showerSaver appObject) {
 		// TODO Auto-generated constructor stub
@@ -43,7 +45,7 @@ public class timerSetup implements Screen{
 		displayTimeStyle = new LabelStyle(showerSaver.white,Color.BLACK);
 		stage = new Stage(new ScreenViewport());
 		batch = new SpriteBatch();
-		displayTime = new Label(String.format("%d:%02d",showerSaver.minute, showerSaver.seconds), displayTimeStyle);
+		displayTime = new Label(String.format("%d:%02d Seconds",showerSaver.minute, showerSaver.seconds), displayTimeStyle);
 		atlas = showerSaver.loadManager.get("buttons.pack");
 		timerAtlas = showerSaver.loadManager.get("swag.pack");
 		
@@ -67,8 +69,8 @@ public class timerSetup implements Screen{
 		timerStyleDecrease.over = timerSkin.getDrawable("newbuttdownclick");
 		timerStyleDecrease.font = showerSaver.white;
 		
-		button_back = new TextButton("<--", style);
-		button_next = new TextButton("-->", style);
+		button_back = new TextButton("<", style);
+		button_next = new TextButton(">", style);
 		button_increaseTime = new TextButton("",timerStyleIncrease);
 		button_decreaseTime = new TextButton("",timerStyleDecrease);
 		
@@ -76,6 +78,7 @@ public class timerSetup implements Screen{
 		treeTwo = showerSaver.loadManager.get("sadTree.png");
 		treeThree = showerSaver.loadManager.get("verySadTree.png");
 		stage = new Stage(new ScreenViewport());
+		clickSound = showerSaver.loadManager.get("data/CLICK12A.mp3");
 	}
 	@Override
 	public void show() {
@@ -96,17 +99,18 @@ public class timerSetup implements Screen{
 		batch.end();
 		batch.begin();
 		if(showerSaver.timer < 480)
-			batch.draw(treeOne, 0,0,3.5f*treeOne.getWidth(),3.5f*treeOne.getHeight());
+			batch.draw(treeOne, 0,0,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
 		else if(showerSaver.timer >= 480 && showerSaver.timer < 900)
-			batch.draw(treeTwo,Gdx.graphics.getWidth()/2 - treeTwo.getWidth(),Gdx.graphics.getHeight()/8,3.5f*treeTwo.getWidth(),3.5f*treeTwo.getHeight());
+			batch.draw(treeTwo,0,0,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
 		else if(showerSaver.timer >= 900)
-			batch.draw(treeThree,Gdx.graphics.getWidth()/2 - treeThree.getWidth(),Gdx.graphics.getHeight()/8,3.5f*treeThree.getWidth(),3.5f*treeThree.getHeight());
+			batch.draw(treeThree,0,0,Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
 		batch.end();
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		//camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+		camera.setToOrtho(false, width, height);
         camera.update();
 		if(stage == null){
 			stage = new Stage(new ScreenViewport());
@@ -121,15 +125,15 @@ public class timerSetup implements Screen{
 		Gdx.input.setInputProcessor(stage);
 
 		displayTime.setX(0);
-		displayTime.setY(Gdx.graphics.getHeight()*0.6f);
+		displayTime.setY(Gdx.graphics.getHeight()*0.62f);
 		displayTime.setWidth(width);
 		displayTime.setAlignment(Align.center);
-		displayTime.setFontScale(1.3f);
+		displayTime.setFontScale(1.8f);
 		
 		button_back.setWidth(Gdx.graphics.getWidth()/4.5f);
-		button_back.setHeight(Gdx.graphics.getHeight()/8f);
+		button_back.setHeight(Gdx.graphics.getHeight()/10f);
 		button_back.setX(Gdx.graphics.getWidth()/2 - 2*button_back.getWidth());
-		button_back.setY(Gdx.graphics.getHeight()*0.8f);
+		button_back.setY(Gdx.graphics.getHeight()*0.85f);
 		button_back.addListener(new InputListener() {
 			public boolean touchDown (InputEvent event, float x, float y,
 										int pointer, int button) {
@@ -152,9 +156,9 @@ public class timerSetup implements Screen{
 		});
 
 		button_next.setWidth(Gdx.graphics.getWidth()/4.5f);
-		button_next.setHeight(Gdx.graphics.getHeight()/8f);
+		button_next.setHeight(Gdx.graphics.getHeight()/10f);
 		button_next.setX(Gdx.graphics.getWidth()/2 + button_next.getWidth());
-		button_next.setY(Gdx.graphics.getHeight()*0.8f);
+		button_next.setY(Gdx.graphics.getHeight()*0.85f);
 		button_next.addListener(new InputListener() {
 			public boolean touchDown (InputEvent event, float x, float y,
 										int pointer, int button) {
@@ -176,8 +180,8 @@ public class timerSetup implements Screen{
 			}
 		});
 		
-		button_increaseTime.setWidth(Gdx.graphics.getWidth()/15f);
-		button_increaseTime.setHeight(Gdx.graphics.getHeight()/15f);
+		button_increaseTime.setWidth(Gdx.graphics.getWidth()/4f);
+		button_increaseTime.setHeight(Gdx.graphics.getHeight()/10f);
 		button_increaseTime.setX(Gdx.graphics.getWidth()/2 - button_increaseTime.getWidth()/2);
 		button_increaseTime.setY(Gdx.graphics.getHeight()*0.70f);
 		button_increaseTime.addListener(new InputListener() {
@@ -189,8 +193,9 @@ public class timerSetup implements Screen{
 			public void touchUp(InputEvent event, float x, float y,
 									int pointer, int button) {
 				if(checked){
+					clickSound.play();
 					showerSaver.updateTime(showerSaver.timer + 30);
-					displayTime.setText(String.format("%d:%02d",showerSaver.minute,showerSaver.seconds));
+					displayTime.setText(String.format("%d:%02d Seconds",showerSaver.minute,showerSaver.seconds));
 				}
 				checked = false;
 			}
@@ -203,8 +208,8 @@ public class timerSetup implements Screen{
 			}
 		});
 		
-		button_decreaseTime.setWidth(Gdx.graphics.getWidth()/15f);
-		button_decreaseTime.setHeight(Gdx.graphics.getHeight()/15f);
+		button_decreaseTime.setWidth(Gdx.graphics.getWidth()/4f);
+		button_decreaseTime.setHeight(Gdx.graphics.getHeight()/10f);
 		button_decreaseTime.setX(Gdx.graphics.getWidth()/2 - button_decreaseTime.getWidth()/2);
 		button_decreaseTime.setY(Gdx.graphics.getHeight()*0.50f);
 		button_decreaseTime.addListener(new InputListener() {
@@ -216,8 +221,9 @@ public class timerSetup implements Screen{
 			public void touchUp(InputEvent event, float x, float y,
 									int pointer, int button) {
 				if(checked){
+					clickSound.play();
 					showerSaver.updateTime(showerSaver.timer - 30);
-					displayTime.setText(String.format("%d:%02d",showerSaver.minute,showerSaver.seconds));
+					displayTime.setText(String.format("%d:%02d Seconds",showerSaver.minute,showerSaver.seconds));
 				}
 				checked = false;
 			}
