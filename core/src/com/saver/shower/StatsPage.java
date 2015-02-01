@@ -88,9 +88,9 @@ public class StatsPage extends history implements Screen{
 		displayStatsStyle = new LabelStyle(showerSaver.white,Color.BLACK);
 		displayStats = new Label(String.format("Average Shower Time: %d min %d sec\n Longest Shower: %d min %d sec\n Shortest Shower: %d min %d sec\n", avgMin, avgSec, longMin, longSec, shortMin, shortSec), displayStatsStyle);
 		
-		treeOne = showerSaver.loadManager.get("SS3.bmp");
-		treeTwo = showerSaver.loadManager.get("SS4.bmp");
-		treeThree = showerSaver.loadManager.get("SS5.bmp");
+		treeOne = showerSaver.loadManager.get("happyTree.png");
+		treeTwo = showerSaver.loadManager.get("sadTree.png");
+		treeThree = showerSaver.loadManager.get("verySadTree.png");
 	}
 	
 	@Override
