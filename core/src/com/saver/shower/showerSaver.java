@@ -20,6 +20,9 @@ public class showerSaver extends Game {
 	
 	@Override
 	public void create() {
+		//Set Permissions
+		//getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		
 		loadManager.load("gamefont_0.png",Texture.class);
 		loadManager.load("gamefont_1.png",Texture.class);
 		loadManager.load("gamefont.fnt",BitmapFont.class);
