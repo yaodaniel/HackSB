@@ -74,7 +74,7 @@ public class songPage extends history implements Screen{
         button_start = new TextButton("Done Early?", style);
 		button_start.setWidth(Gdx.graphics.getWidth()/2.5f);
 		button_start.setHeight(Gdx.graphics.getHeight()/8);
-		button_start.setX(Gdx.graphics.getWidth()/2 + button_start.getWidth()/4);
+		button_start.setX(Gdx.graphics.getWidth()/2 + button_start.getWidth()/8);
 		button_start.setY(Gdx.graphics.getHeight() - 1.5f * button_start.getHeight());
 		
 		displayTime.setX(Gdx.graphics.getWidth()/6	);
@@ -165,11 +165,14 @@ public class songPage extends history implements Screen{
         	this.obj.setScreen(new StatsPage(obj));
         	//redirect stats
         }
-        // else if (totalTime <= 0){
-        //     music.stop();
-        //     this.obj.setScreen(new StatsPage(obj));
-        //     //redirect fail
-        // }
+         else if (totalTime <= 0){
+             //redirect fail
+             if (music.isPlaying()){
+            	 music.pause();
+            	 music.stop();
+            	 music.dispose();
+             }
+         }
         
         else if (totalTime >= 55 && totalTime <= 65){
         	if (!alerts.isPlaying()){

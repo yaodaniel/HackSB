@@ -83,10 +83,10 @@ public class playlistScreen implements Screen{
 		Gdx.input.setInputProcessor(stage);
 		
 		displayPlaylist.setX(0);
-		displayPlaylist.setY(Gdx.graphics.getHeight()- displayPlaylist.getHeight());
+		displayPlaylist.setY(Gdx.graphics.getHeight()- 2.0f*displayPlaylist.getHeight());
 		displayPlaylist.setWidth(width);
 		displayPlaylist.setAlignment(Align.center);
-		displayPlaylist.setFontScale(1.0f);
+		displayPlaylist.setFontScale(2.5f);
 		stage.addActor(displayPlaylist);
 		
 		TextButtonStyle style = new TextButtonStyle();
